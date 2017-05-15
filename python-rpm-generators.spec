@@ -66,6 +66,9 @@ and add appropriate Provides and Requires tags to them.
 %package -n     python3-rpm-generators
 Summary:        %{summary}
 Requires:       python3-setuptools
+# Conflicts with older versions of `rpm-build` because it copies several files
+# to the same locations which is ok only when they have the same contents.
+Conflicts:      rpm-build < 4.13.0.1-2
 %{?python_provide:%python_provide python3-rpm-generators}
 
 %description -n python3-rpm-generators
