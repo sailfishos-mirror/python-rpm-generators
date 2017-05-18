@@ -34,7 +34,7 @@
 Name:           python-rpm-generators
 Summary:        Requires and Provides generators for Python RPMs
 Version:        %{rpmver}
-Release:        %{?snapver:0.%{snapver}.}1%{?dist}
+Release:        %{?snapver:0.%{snapver}.}2%{?dist}
 License:        GPLv2+
 Url:            http://www.rpm.org/
 Source0:        http://ftp.rpm.org/releases/%{srcdir}/%{srcname}-%{srcver}.tar.bz2
@@ -66,6 +66,9 @@ and add appropriate Provides and Requires tags to them.
 %package -n     python3-rpm-generators
 Summary:        %{summary}
 Requires:       python3-setuptools
+# We're installing files into rpm's directories, therefore we're requiring it
+# to be installed so the directories are created.
+Requires:       rpm
 # Conflicts with older versions of `rpm-build` because it copies several files
 # to the same locations which is ok only when they have the same contents.
 Conflicts:      rpm-build < 4.13.0.1-2
@@ -99,15 +102,21 @@ install -Dm 755 scripts/__pycache__/* \
 
 
 %files -n python3-rpm-generators
+%license COPYING
 %{_fileattrsdir}/python.attr
 %{_rpmconfigdir}/pythondeps.sh
 %{_rpmconfigdir}/pythondistdeps.py
 
 %if ! 0%{?bootstrapping_python}
-%{_rpmconfigdir}/__pycache__/*
+%{_rpmconfigdir}/__pycache__
 %endif
 
 
 %changelog
+* Thu May 18 2017 Tomas Orsava <torsava@redhat.com> - 4.13.0.1-2
+- Added a license file
+- Added a dependency on rpm for the proper directory structure
+- Properly owning the __pycache__ directory
+
 * Tue May 02 2017 Tomas Orsava <torsava@redhat.com> - 4.13.0.1-1
 - Splitting Python RPM generators from the `rpm` package to standalone one
