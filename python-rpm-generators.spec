@@ -34,7 +34,7 @@
 Name:           python-rpm-generators
 Summary:        Requires and Provides generators for Python RPMs
 Version:        %{rpmver}
-Release:        %{?snapver:0.%{snapver}.}2%{?dist}.1
+Release:        %{?snapver:0.%{snapver}.}3%{?dist}
 License:        GPLv2+
 Url:            http://www.rpm.org/
 Source0:        http://ftp.rpm.org/releases/%{srcdir}/%{srcname}-%{srcver}.tar.bz2
@@ -57,6 +57,7 @@ Patch7: rpm-4.13.x-pythondistdeps.py-fix-processing-wheels.patch
 # Switch the shebang of pythondistdeps.py to Python 3
 # Downstream only: https://github.com/rpm-software-management/rpm/pull/212
 Patch8: rpm-4.13.x-pythondistdeps-python3.patch
+Patch9: rpm-4.13.x-pythondeps-platform-python-abi.patch
 
 %description
 This package provides scripts that analyse Python binary RPM packages
@@ -113,6 +114,10 @@ install -Dm 755 scripts/__pycache__/* \
 
 
 %changelog
+* Tue Aug 08 2017 Tomas Orsava <torsava@redhat.com> - 4.13.0.1-3
+- Add patch 9: Generate requires and provides for platform-python(abi)
+  (https://fedoraproject.org/wiki/Changes/Platform_Python_Stack)
+
 * Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 4.13.0.1-2.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
