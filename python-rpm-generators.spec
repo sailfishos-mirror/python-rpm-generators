@@ -26,15 +26,15 @@
 
 # These macros are copied from the `rpm` package so it's trivial to keep
 # the two packages on the same upstream version.
-%global rpmver 4.13.0.1
-#global snapver rc2
+%global rpmver 4.14.0
+%global snapver rc1
 %global srcver %{version}%{?snapver:-%{snapver}}
 %global srcdir %{?snapver:testing}%{!?snapver:rpm-%(echo %{version} | cut -d'.' -f1-2).x}
 
 Name:           python-rpm-generators
 Summary:        Requires and Provides generators for Python RPMs
 Version:        %{rpmver}
-Release:        %{?snapver:0.%{snapver}.}4%{?dist}
+Release:        %{?snapver:0.%{snapver}.}1%{?dist}
 License:        GPLv2+
 Url:            http://www.rpm.org/
 Source0:        http://ftp.rpm.org/releases/%{srcdir}/%{srcname}-%{srcver}.tar.bz2
@@ -45,20 +45,17 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 %endif
 
-# Patches already upstream:
-Patch0: rpm-4.13.x-pythondistdeps.patch
-Patch1: rpm-4.13.x-pythondistdeps-Makefile.patch
-Patch2: rpm-4.13.x-pythondistdeps-fileattr.patch
-Patch3: rpm-4.13.x-pythondistdeps.py-skip-distribution-metadata-if-ther.patch
-Patch4: rpm-4.13.x-pythondistdeps.py-show-warning-if-version-is-not-fou.patch
-Patch5: rpm-4.13.x-pythondistdeps.py-skip-.egg-link-files.patch
-Patch6: rpm-4.13.x-pythondistdeps.py-add-forgotten-import.patch
-Patch7: rpm-4.13.x-pythondistdeps.py-fix-processing-wheels.patch
+# Enable rich Provides generator (pythondistdeps.py instead of pythondeps.sh)
+# Downstream only
+Patch1: rpm-4.13.x-pythondistdeps-fileattr.patch
 # Switch the shebang of pythondistdeps.py to Python 3
 # Downstream only: https://github.com/rpm-software-management/rpm/pull/212
-Patch8: rpm-4.13.x-pythondistdeps-python3.patch
-Patch9: rpm-4.13.x-pythondeps-platform-python-abi.patch
-Patch10: rpm-4.13.x-pythondistdeps.py-platform-python.patch
+Patch2: rpm-4.13.x-pythondistdeps-python3.patch
+
+# Handle Platform-Python implemented as a separate Python stack
+# https://fedoraproject.org/wiki/Changes/Platform_Python_Stack
+Patch3: rpm-4.13.x-pythondeps-platform-python-abi.patch
+Patch4: rpm-4.13.x-pythondistdeps.py-platform-python.patch
 
 %description
 This package provides scripts that analyse Python binary RPM packages
@@ -115,6 +112,11 @@ install -Dm 755 scripts/__pycache__/* \
 
 
 %changelog
+* Mon Sep 18 2017 Tomas Orsava <torsava@redhat.com> - 4.14.0-0.rc1.1
+- Update to a new upstream version of RPM
+- Drop upstreamed patches
+- Renumber remaining patches
+
 * Thu Aug 24 2017 Miro Hrončok <mhroncok@redhat.com> - 4.13.0.1-4
 - Add patch 10: Do not provide pythonXdist for platform-python packages (rhbz#1484607)
 
