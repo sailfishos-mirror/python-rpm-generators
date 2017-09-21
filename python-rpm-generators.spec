@@ -28,7 +28,7 @@
 # the two packages on the same upstream version.
 %global rpmver 4.14.0
 #global snapver rc2
-%global rel 1
+%global rel 2
 
 %global srcver %{version}%{?snapver:-%{snapver}}
 %global srcdir %{?snapver:testing}%{!?snapver:rpm-%(echo %{version} | cut -d'.' -f1-2).x}
@@ -114,6 +114,9 @@ install -Dm 755 scripts/__pycache__/* \
 
 
 %changelog
+* Tue Nov 28 2017 Tomas Orsava <torsava@redhat.com> - 4.14.0-2
+- Switch bootsrapping macro to a bcond for modularity
+
 * Fri Oct 20 2017 Tomas Orsava <torsava@redhat.com> - 4.14.0-1
 - Rebase to rpm 4.14.0 final (http://rpm.org/wiki/Releases/4.14.0)
 - Re-synchronize version/release macros with the rpm Fedora package
