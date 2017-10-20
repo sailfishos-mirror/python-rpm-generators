@@ -27,14 +27,16 @@
 # These macros are copied from the `rpm` package so it's trivial to keep
 # the two packages on the same upstream version.
 %global rpmver 4.14.0
-%global snapver rc1
+#global snapver rc2
+%global rel 1
+
 %global srcver %{version}%{?snapver:-%{snapver}}
 %global srcdir %{?snapver:testing}%{!?snapver:rpm-%(echo %{version} | cut -d'.' -f1-2).x}
 
 Name:           python-rpm-generators
 Summary:        Requires and Provides generators for Python RPMs
 Version:        %{rpmver}
-Release:        %{?snapver:0.%{snapver}.}1%{?dist}
+Release:        %{?snapver:0.%{snapver}.}%{rel}%{?dist}
 License:        GPLv2+
 Url:            http://www.rpm.org/
 Source0:        http://ftp.rpm.org/releases/%{srcdir}/%{srcname}-%{srcver}.tar.bz2
@@ -112,6 +114,10 @@ install -Dm 755 scripts/__pycache__/* \
 
 
 %changelog
+* Fri Oct 20 2017 Tomas Orsava <torsava@redhat.com> - 4.14.0-1
+- Rebase to rpm 4.14.0 final (http://rpm.org/wiki/Releases/4.14.0)
+- Re-synchronize version/release macros with the rpm Fedora package
+
 * Mon Sep 18 2017 Tomas Orsava <torsava@redhat.com> - 4.14.0-0.rc1.1
 - Update to a new upstream version of RPM
 - Drop upstreamed patches
