@@ -36,7 +36,7 @@
 Name:           python-rpm-generators
 Summary:        Requires and Provides generators for Python RPMs
 Version:        %{rpmver}
-Release:        %{?snapver:0.%{snapver}.}%{rel}%{?dist}
+Release:        %{?snapver:0.%{snapver}.}%{rel}%{?dist}.1
 License:        GPLv2+
 Url:            http://www.rpm.org/
 Source0:        http://ftp.rpm.org/releases/%{srcdir}/%{srcname}-%{srcver}.tar.bz2
@@ -114,6 +114,9 @@ install -Dm 755 scripts/__pycache__/* \
 
 
 %changelog
+* Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 4.14.0-2.1
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Tue Nov 28 2017 Tomas Orsava <torsava@redhat.com> - 4.14.0-2
 - Switch bootsrapping macro to a bcond for modularity
 
