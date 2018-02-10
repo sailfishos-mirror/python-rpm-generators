@@ -1,106 +1,42 @@
-# This package is part of the Python 3 bootstrapping sequence.
-#
-# The python3-devel subpackage has a runtime dependency on this package.
-# Therefore it needs to be built before Python 3 itself. To facilitate this,
-# this package has a bootstrapping mode—triggered by the macro below—that skips
-# bytecompilation and therefore no Python is actually needed for building of
-# this package. After Python 3 is built, this package can be rebuilt in
-# normal mode again.
-#
-# Note, however, that even the bootstrapping version of this package is fully
-# functional as Python will simply bytecompile the Python files when they are
-# run. There will be a warning that the bytecompiled file cannot be saved
-# (unless Python is run with root privileges), but the script will work.
-#
-# More info on the Python 3 bootstrapping sequence in the `python3` spec file.
-#
-%bcond_with bootstrap
-
-
-# Disable automatic (Python 2) bytecompilation in %%__os_install_post.
-# When not in bootstrapping mode, the scripts are bytecompiled
-# in the %%install section.
+# Disable automatic bytecompilation. We install only one script and we will
+# never "import" it.
 %undefine py_auto_byte_compile
 
-%global srcname rpm
-
-# These macros are copied from the `rpm` package so it's trivial to keep
-# the two packages on the same upstream version.
-%global rpmver 4.14.0
-#global snapver rc2
-%global rel 2
-
-%global srcver %{version}%{?snapver:-%{snapver}}
-%global srcdir %{?snapver:testing}%{!?snapver:rpm-%(echo %{version} | cut -d'.' -f1-2).x}
-
 Name:           python-rpm-generators
-Summary:        Requires and Provides generators for Python RPMs
-Version:        %{rpmver}
-Release:        %{?snapver:0.%{snapver}.}%{rel}%{?dist}.1
+Summary:        Dependency generators for Python RPMs
+Version:        5
+Release:        1%{?dist}
+
+# Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
-Url:            http://www.rpm.org/
-Source0:        http://ftp.rpm.org/releases/%{srcdir}/%{srcname}-%{srcver}.tar.bz2
+Url:            https://src.fedoraproject.org/python-rpm-generators
+# Commit is the last change in following files
+Source0:        https://raw.githubusercontent.com/rpm-software-management/rpm/102eab50b3d0d6546dfe082eac0ade21e6b3dbf1/COPYING
+Source1:        python.attr
+Source2:        pythondeps.sh
+Source3:        pythondistdeps.py
 
 BuildArch:      noarch
 
-%if %{without bootstrap}
-BuildRequires:  python3-devel
-%endif
-
-# Enable rich Provides generator (pythondistdeps.py instead of pythondeps.sh)
-# Downstream only
-Patch1: rpm-4.13.x-pythondistdeps-fileattr.patch
-# Switch the shebang of pythondistdeps.py to Python 3
-# Downstream only: https://github.com/rpm-software-management/rpm/pull/212
-Patch2: rpm-4.13.x-pythondistdeps-python3.patch
-
-# Handle Platform-Python implemented as a separate Python stack
-# https://fedoraproject.org/wiki/Changes/Platform_Python_Stack
-Patch3: rpm-4.13.x-pythondeps-platform-python-abi.patch
-Patch4: rpm-4.13.x-pythondistdeps.py-platform-python.patch
-
 %description
-This package provides scripts that analyse Python binary RPM packages
-and add appropriate Provides and Requires tags to them.
+%{summary}.
 
-
-%package -n     python3-rpm-generators
+%package -n python3-rpm-generators
 Summary:        %{summary}
 Requires:       python3-setuptools
-# We're installing files into rpm's directories, therefore we're requiring it
-# to be installed so the directories are created.
-Requires:       rpm
-# Conflicts with older versions of `rpm-build` because it copies several files
-# to the same locations which is ok only when they have the same contents.
+# The point of split
 Conflicts:      rpm-build < 4.13.0.1-2
-%{?python_provide:%python_provide python3-rpm-generators}
 
 %description -n python3-rpm-generators
-This package provides scripts that analyse Python binary RPM packages
-and add appropriate Provides and Requires tags to them.
-
+%{summary}.
 
 %prep
-%autosetup -n %{srcname}-%{srcver} -p1
-
-
-%build
-%if %{without bootstrap}
-%{__python3} -m compileall scripts/
-%endif
-
+%autosetup -c -T
+cp -a %{sources} .
 
 %install
-install -Dm 644 fileattrs/python.attr -t %{buildroot}/%{_fileattrsdir}
-install -Dm 755 scripts/pythondeps.sh \
-                scripts/pythondistdeps.py \
-                -t %{buildroot}/%{_rpmconfigdir}
-
-%if %{without bootstrap}
-install -Dm 755 scripts/__pycache__/* \
-                -t %{buildroot}/%{_rpmconfigdir}/__pycache__
-%endif
-
+install -Dpm0644 -t %{buildroot}%{_fileattrsdir} python.attr
+install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 
 %files -n python3-rpm-generators
 %license COPYING
@@ -108,12 +44,10 @@ install -Dm 755 scripts/__pycache__/* \
 %{_rpmconfigdir}/pythondeps.sh
 %{_rpmconfigdir}/pythondistdeps.py
 
-%if %{without bootstrap}
-%{_rpmconfigdir}/__pycache__
-%endif
-
-
 %changelog
+* Sun Feb 11 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-1
+- Fork upstream generators
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 4.14.0-2.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
