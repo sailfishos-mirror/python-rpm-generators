@@ -122,6 +122,11 @@ for f in files:
             else:
                 warn("Version for {!r} has not been found".format(dist), RuntimeWarning)
                 continue
+
+        # XXX: https://github.com/pypa/setuptools/pull/1275
+        import platform
+        platform.python_version = lambda: dist.py_version
+
         if Provides_PyMajorVer_Variant or PyMajorVer_Deps or legacy_Provides or legacy:
             # Get the Python major version
             pyver_major = dist.py_version.split('.')[0]

@@ -47,6 +47,7 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 %changelog
 * Sun Feb 11 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-1
 - Fork upstream generators
+- "Fix" support of environment markers
 
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 4.14.0-2.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
