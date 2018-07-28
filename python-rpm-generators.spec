@@ -5,7 +5,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        5
-Release:        2%{?dist}
+Release:        3%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -13,8 +13,9 @@ Url:            https://src.fedoraproject.org/python-rpm-generators
 # Commit is the last change in following files
 Source0:        https://raw.githubusercontent.com/rpm-software-management/rpm/102eab50b3d0d6546dfe082eac0ade21e6b3dbf1/COPYING
 Source1:        python.attr
-Source2:        pythondeps.sh
-Source3:        pythondistdeps.py
+Source2:        pythondist.attr
+Source3:        pythondeps.sh
+Source4:        pythondistdeps.py
 
 BuildArch:      noarch
 
@@ -26,6 +27,8 @@ Summary:        %{summary}
 Requires:       python3-setuptools
 # The point of split
 Conflicts:      rpm-build < 4.13.0.1-2
+# Breaking change, change a way how depgen is enabled
+Conflicts:      python-rpm-macros < 3-36
 
 %description -n python3-rpm-generators
 %{summary}.
@@ -35,7 +38,7 @@ Conflicts:      rpm-build < 4.13.0.1-2
 cp -a %{sources} .
 
 %install
-install -Dpm0644 -t %{buildroot}%{_fileattrsdir} python.attr
+install -Dpm0644 -t %{buildroot}%{_fileattrsdir} python.attr pythondist.attr
 install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 
 %files -n python3-rpm-generators
@@ -45,6 +48,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Sat Jul 28 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-3
+- Add pythondist generator
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 5-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
