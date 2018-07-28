@@ -44,6 +44,7 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 %files -n python3-rpm-generators
 %license COPYING
 %{_fileattrsdir}/python.attr
+%{_fileattrsdir}/pythondist.attr
 %{_rpmconfigdir}/pythondeps.sh
 %{_rpmconfigdir}/pythondistdeps.py
 
