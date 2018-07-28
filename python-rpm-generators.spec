@@ -28,7 +28,7 @@ Requires:       python3-setuptools
 # The point of split
 Conflicts:      rpm-build < 4.13.0.1-2
 # Breaking change, change a way how depgen is enabled
-Conflicts:      python-rpm-macros < 3-36
+Conflicts:      python-rpm-macros < 3-35
 
 %description -n python3-rpm-generators
 %{summary}.
