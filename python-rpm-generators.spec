@@ -5,7 +5,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        5
-Release:        3%{?dist}
+Release:        4%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -49,6 +49,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Sat Jul 28 2018 Miro Hrončok <mhroncok@redhat.com> - 5-4
+- Use nonstandardlib for purelib definition (#1609492)
+
 * Sat Jul 28 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 5-3
 - Add pythondist generator
 
