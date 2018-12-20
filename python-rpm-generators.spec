@@ -4,7 +4,7 @@
 
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
-Version:        6
+Version:        7
 Release:        1%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
@@ -49,6 +49,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Thu Dec 20 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 7-1
+- Enable requires generator
+
 * Wed Oct 03 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 6-1
 - Tighten regex for depgen
 
