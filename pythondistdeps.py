@@ -102,7 +102,7 @@ for f in files:
             lower.endswith('.egg-info') or \
             lower.endswith('.dist-info'):
         # This import is very slow, so only do it if needed
-        from pkg_resources import Distribution, FileMetadata, PathMetadata
+        from pkg_resources import Distribution, FileMetadata, PathMetadata, Requirement
         dist_name = basename(f)
         if isdir(f):
             path_item = dirname(f)
@@ -126,6 +126,7 @@ for f in files:
         # XXX: https://github.com/pypa/setuptools/pull/1275
         import platform
         platform.python_version = lambda: dist.py_version
+
 
         if Provides_PyMajorVer_Variant or PyMajorVer_Deps or legacy_Provides or legacy:
             # Get the Python major version
@@ -179,6 +180,11 @@ for f in files:
                         if dep in deps:
                             depsextras.remove(dep)
                 deps = depsextras
+            # console_scripts/gui_scripts entry points need pkg_resources from setuptools
+            if (dist.get_entry_map('console_scripts') or
+                    dist.get_entry_map('gui_scripts')):
+                # stick them first so any more specific requirement overrides it
+                deps.insert(0, Requirement.parse('setuptools'))
             # add requires/recommends based on egg/dist metadata
             for dep in deps:
                 if legacy:

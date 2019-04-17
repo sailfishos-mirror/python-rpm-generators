@@ -4,8 +4,8 @@
 
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
-Version:        7
-Release:        2%{?dist}
+Version:        8
+Release:        1%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -49,6 +49,10 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Wed Apr 17 2019 Miro Hrončok <mhroncok@redhat.com> - 8-1
+- console_scripts entry points to require setuptools
+  https://github.com/rpm-software-management/rpm/pull/666
+
 * Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 7-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
