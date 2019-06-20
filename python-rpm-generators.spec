@@ -4,7 +4,7 @@
 
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
-Version:        8
+Version:        9
 Release:        1%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
@@ -49,6 +49,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Mon Jun 24 2019 Tomas Orsava <torsava@redhat.com> - 9-1
+- Canonicalize Python versions and properly handle != spec
+
 * Wed Apr 17 2019 Miro Hrončok <mhroncok@redhat.com> - 8-1
 - console_scripts entry points to require setuptools
   https://github.com/rpm-software-management/rpm/pull/666
