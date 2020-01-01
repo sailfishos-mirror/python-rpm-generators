@@ -4,8 +4,8 @@
 
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
-Version:        9
-Release:        2%{?dist}
+Version:        10
+Release:        1%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -49,6 +49,13 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Wed Jan 01 2020 Miro Hrončok <mhroncok@redhat.com> - 10-1
+- Handle version ending with ".*" (#1758141)
+- Handle compatible-release operator "~=" (#1758141)
+- Use rich deps for semantically versioned dependencies
+- Match Python version if minor has multiple digits (e.g. 3.10, #1777382)
+- Only add setuptools requirement for egg-info packages
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 9-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 

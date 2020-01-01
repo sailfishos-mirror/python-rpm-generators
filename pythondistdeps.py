@@ -102,7 +102,7 @@ for f in files:
             lower.endswith('.egg-info') or \
             lower.endswith('.dist-info'):
         # This import is very slow, so only do it if needed
-        from pkg_resources import Distribution, FileMetadata, PathMetadata, Requirement
+        from pkg_resources import Distribution, FileMetadata, PathMetadata, Requirement, parse_version
         dist_name = basename(f)
         if isdir(f):
             path_item = dirname(f)
@@ -116,7 +116,7 @@ for f in files:
             # Try to parse the Python version from the path the metadata
             # resides at (e.g. /usr/lib/pythonX.Y/site-packages/...)
             import re
-            res = re.search(r"/python(?P<pyver>\d+\.\d)/", path_item)
+            res = re.search(r"/python(?P<pyver>\d+\.\d+)/", path_item)
             if res:
                 dist.py_version = res.group('pyver')
             else:
@@ -184,8 +184,10 @@ for f in files:
                             depsextras.remove(dep)
                 deps = depsextras
             # console_scripts/gui_scripts entry points need pkg_resources from setuptools
-            if (dist.get_entry_map('console_scripts') or
-                    dist.get_entry_map('gui_scripts')):
+            if ((dist.get_entry_map('console_scripts') or
+                     dist.get_entry_map('gui_scripts')) and
+                    (lower.endswith('.egg') or
+                     lower.endswith('.egg-info'))):
                 # stick them first so any more specific requirement overrides it
                 deps.insert(0, Requirement.parse('setuptools'))
             # add requires/recommends based on egg/dist metadata
@@ -248,11 +250,35 @@ names.sort()
 for name in names:
     if py_deps[name]:
         # Print out versioned provides, requires, recommends, conflicts
+        spec_list = []
         for spec in py_deps[name]:
             if spec[0] == '!=':
-                print('({n} < {v} or {n} >= {v}.0)'.format(n=name, v=spec[1]))
+                spec_list.append('{n} < {v} or {n} >= {v}.0'.format(n=name, v=spec[1]))
+            elif spec[0] == '~=':
+                # Parse the current version
+                next_ver = parse_version(spec[1]).base_version.split('.')
+                # Drop the micro version
+                next_ver = next_ver[0:-1]
+                # Increment the minor version
+                next_ver[-1] = str(int(next_ver[-1]) + 1)
+                next_ver = '.'.join(next_ver)
+                spec_list.append('{n} >= {v} with {n} < {vnext}'.format(n=name, v=spec[1], vnext=next_ver))
+            elif spec[0] == '==' and spec[1].endswith('.*'):
+                # Parse the current version
+                next_ver = parse_version(spec[1]).base_version.split('.')
+                # Drop the micro version from both the version in spec and next_ver
+                next_ver = next_ver[0:-1]
+                spec = (spec[0], '.'.join(next_ver))
+                # Increment the minor version
+                next_ver[-1] = str(int(next_ver[-1]) + 1)
+                next_ver = '.'.join(next_ver)
+                spec_list.append('{n} >= {v} with {n} < {vnext}'.format(n=name, v=spec[1], vnext=next_ver))
             else:
-                print('{} {} {}'.format(name, spec[0], spec[1]))
+                spec_list.append('{} {} {}'.format(name, spec[0], spec[1]))
+        if len(spec_list) == 1:
+            print(spec_list[0])
+        else:
+            print('({})'.format(' with '.join(spec_list)))
     else:
         # Print out unversioned provides, requires, recommends, conflicts
         print(name)
