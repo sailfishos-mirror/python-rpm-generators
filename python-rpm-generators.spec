@@ -5,7 +5,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        10
-Release:        1%{?dist}
+Release:        2%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -49,6 +49,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Fri Jan 03 2020 Miro Hrončok <mhroncok@redhat.com> - 10-2
+- Fix more complicated requirement expressions by adding parenthesis
+
 * Wed Jan 01 2020 Miro Hrončok <mhroncok@redhat.com> - 10-1
 - Handle version ending with ".*" (#1758141)
 - Handle compatible-release operator "~=" (#1758141)
