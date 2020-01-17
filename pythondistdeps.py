@@ -32,6 +32,11 @@ PyMajorVer_Deps = False
 legacy_Provides = False
 legacy = False
 
+def normalize_name(name):
+    """https://www.python.org/dev/peps/pep-0503/#normalized-names"""
+    import re
+    return re.sub(r'[-_.]+', '-', name).lower()
+
 for o, a in opts:
     if o in ('-h', '--help'):
         print('-h, --help\tPrint help')
@@ -127,6 +132,12 @@ for f in files:
         import platform
         platform.python_version = lambda: dist.py_version
 
+        # This is the PEP 503 normalized name.
+        # It does also convert dots to dashes, unlike dist.key.
+        # In the current code, we only add additional provides with this.
+        # Later, we can start requiring them.
+        # See https://bugzilla.redhat.com/show_bug.cgi?id=1791530
+        normalized_name = normalize_name(dist.project_name)
 
         if Provides_PyMajorVer_Variant or PyMajorVer_Deps or legacy_Provides or legacy:
             # Get the Python major version
@@ -142,10 +153,16 @@ for f in files:
                 name = 'python{}dist({})'.format(dist.py_version, dist.key)
                 if name not in py_deps:
                     py_deps[name] = []
+                name_ = 'python{}dist({})'.format(dist.py_version, normalized_name)
+                if name_ not in py_deps:
+                    py_deps[name_] = []
             if Provides_PyMajorVer_Variant or PyMajorVer_Deps:
                 pymajor_name = 'python{}dist({})'.format(pyver_major, dist.key)
                 if pymajor_name not in py_deps:
                     py_deps[pymajor_name] = []
+                pymajor_name_ = 'python{}dist({})'.format(pyver_major, normalized_name)
+                if pymajor_name_ not in py_deps:
+                    py_deps[pymajor_name_] = []
             if legacy or legacy_Provides:
                 legacy_name = 'pythonegg({})({})'.format(pyver_major, dist.key)
                 if legacy_name not in py_deps:
@@ -158,8 +175,12 @@ for f in files:
                 if spec not in py_deps[name]:
                     if not legacy:
                         py_deps[name].append(spec)
+                        if name != name_:
+                            py_deps[name_].append(spec)
                     if Provides_PyMajorVer_Variant:
                         py_deps[pymajor_name].append(spec)
+                        if pymajor_name != pymajor_name_:
+                            py_deps[pymajor_name_].append(spec)
                     if legacy or legacy_Provides:
                         py_deps[legacy_name].append(spec)
         if Requires or (Recommends and dist.extras):
