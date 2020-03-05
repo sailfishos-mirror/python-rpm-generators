@@ -16,6 +16,9 @@
     - pythonabi:
         dir: .
         run: ./pythonabi.sh
+    - pythonname:
+        dir: .
+        run: ./pythonname.sh
     required_packages:
     - rpm-build
     - python3-devel

@@ -10,7 +10,8 @@ Url:            https://src.fedoraproject.org/python-rpm-generators
 Source0:        https://raw.githubusercontent.com/rpm-software-management/rpm/102eab50b3d0d6546dfe082eac0ade21e6b3dbf1/COPYING
 Source1:        python.attr
 Source2:        pythondist.attr
-Source3:        pythondistdeps.py
+Source3:        pythonname.attr
+Source4:        pythondistdeps.py
 
 BuildArch:      noarch
 
@@ -22,6 +23,8 @@ Summary:        %{summary}
 Requires:       python3-setuptools
 # We have parametric macro generators, we need RPM 4.16 (4.15.90+ is 4.16 alpha)
 Requires:       rpm > 4.15.90-0
+# We use %%python_provide
+Requires:       python-rpm-macros
 
 %description -n python3-rpm-generators
 %{summary}.
@@ -31,19 +34,21 @@ Requires:       rpm > 4.15.90-0
 cp -a %{sources} .
 
 %install
-install -Dpm0644 -t %{buildroot}%{_fileattrsdir} python.attr pythondist.attr
+install -Dpm0644 -t %{buildroot}%{_fileattrsdir} *.attr
 install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondistdeps.py
 
 %files -n python3-rpm-generators
 %license COPYING
 %{_fileattrsdir}/python.attr
 %{_fileattrsdir}/pythondist.attr
+%{_fileattrsdir}/pythonname.attr
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
 * Wed Apr 01 2020 Miro Hrončok <mhroncok@redhat.com> - 11-1
 - Rewrite python(abi) generators to Lua to make them faster
 - RPM 4.16+ is needed
+- Automatically call %%python_provide
 
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 10-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
