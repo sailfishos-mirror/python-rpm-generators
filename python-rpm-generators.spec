@@ -1,11 +1,7 @@
-# Disable automatic bytecompilation. We install only one script and we will
-# never "import" it.
-%undefine py_auto_byte_compile
-
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
-Version:        10
-Release:        4%{?dist}
+Version:        11
+Release:        1%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -14,8 +10,7 @@ Url:            https://src.fedoraproject.org/python-rpm-generators
 Source0:        https://raw.githubusercontent.com/rpm-software-management/rpm/102eab50b3d0d6546dfe082eac0ade21e6b3dbf1/COPYING
 Source1:        python.attr
 Source2:        pythondist.attr
-Source3:        pythondeps.sh
-Source4:        pythondistdeps.py
+Source3:        pythondistdeps.py
 
 BuildArch:      noarch
 
@@ -25,10 +20,8 @@ BuildArch:      noarch
 %package -n python3-rpm-generators
 Summary:        %{summary}
 Requires:       python3-setuptools
-# The point of split
-Conflicts:      rpm-build < 4.13.0.1-2
-# Breaking change, change a way how depgen is enabled
-Conflicts:      python-rpm-macros < 3-35
+# We have parametric macro generators, we need RPM 4.16 (4.15.90+ is 4.16 alpha)
+Requires:       rpm > 4.15.90-0
 
 %description -n python3-rpm-generators
 %{summary}.
@@ -39,16 +32,19 @@ cp -a %{sources} .
 
 %install
 install -Dpm0644 -t %{buildroot}%{_fileattrsdir} python.attr pythondist.attr
-install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondeps.sh pythondistdeps.py
+install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondistdeps.py
 
 %files -n python3-rpm-generators
 %license COPYING
 %{_fileattrsdir}/python.attr
 %{_fileattrsdir}/pythondist.attr
-%{_rpmconfigdir}/pythondeps.sh
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Wed Apr 01 2020 Miro Hrončok <mhroncok@redhat.com> - 11-1
+- Rewrite python(abi) generators to Lua to make them faster
+- RPM 4.16+ is needed
+
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 10-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
