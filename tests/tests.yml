@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  tags:
+    - classic
+  tasks:
+    - dnf:
+        name: "*"
+        state: latest
+
+- hosts: localhost
+  roles:
+  - role: standard-test-basic
+    tags:
+    - classic
+    tests:
+    - pythonabi:
+        dir: .
+        run: ./pythonabi.sh
+    required_packages:
+    - rpm-build
+    - python3-devel
