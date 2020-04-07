@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        11
-Release:        1%{?dist}
+Release:        2%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -45,6 +45,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Tue Apr 07 2020 Miro Hrončok <mhroncok@redhat.com> - 11-2
+- Use dynamic %%_prefix value when matching files for python(abi) provides
+
 * Wed Apr 01 2020 Miro Hrončok <mhroncok@redhat.com> - 11-1
 - Rewrite python(abi) generators to Lua to make them faster
 - RPM 4.16+ is needed
