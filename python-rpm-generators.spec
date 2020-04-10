@@ -47,6 +47,7 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondistdeps.py
 %changelog
 * Tue Apr 07 2020 Miro Hrončok <mhroncok@redhat.com> - 11-2
 - Use dynamic %%_prefix value when matching files for python(abi) provides
+- Sync with upstream RPM dist generator
 
 * Wed Apr 01 2020 Miro Hrončok <mhroncok@redhat.com> - 11-1
 - Rewrite python(abi) generators to Lua to make them faster
