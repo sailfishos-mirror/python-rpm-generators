@@ -171,7 +171,8 @@ if __name__ == "__main__":
                         help='Provide both `pep503` and `legacy-dots` format of normalized names (useful for a transition period)')
     parser.add_argument('-L', '--legacy-provides', action='store_true', help='Print extra legacy pythonegg Provides')
     parser.add_argument('-l', '--legacy', action='store_true', help='Print legacy pythonegg Provides/Requires instead')
-    parser.add_argument('files', nargs=argparse.REMAINDER)
+    parser.add_argument('--package-name', action='store', help="Name of the RPM package that's being inspected")
+    parser.add_argument('files', nargs=argparse.REMAINDER, help="Files from the RPM package that are to be inspected, can also be supplied on stdin")
     args = parser.parse_args()
 
     py_abi = args.requires
