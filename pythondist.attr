@@ -1,3 +1,3 @@
-%__pythondist_provides	%{_rpmconfigdir}/pythondistdeps.py --provides --majorver-provides
-%__pythondist_requires	%{_rpmconfigdir}/pythondistdeps.py --requires
+%__pythondist_provides	%{_rpmconfigdir}/pythondistdeps.py --provides --normalized-names-format legacy-dots --normalized-names-provide-both --majorver-provides-versions 2.7,%{__default_python3_version}
+%__pythondist_requires	%{_rpmconfigdir}/pythondistdeps.py --requires --normalized-names-format legacy-dots
 %__pythondist_path		^/usr/lib(64)?/python[[:digit:]]\\.[[:digit:]]+/site-packages/[^/]+\\.(dist-info|egg-info|egg-link)$

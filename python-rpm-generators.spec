@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        11
-Release:        4%{?dist}
+Release:        5%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -45,6 +45,15 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Wed Apr 29 2020 Tomas Orsava <torsava@redhat.com> - 11-5
+- Backporting proposed upstream changes
+  https://github.com/rpm-software-management/rpm/pull/1195
+  - Only provide python3dist(..) for the main Python versions (BZ#1812083)
+  - Preparation for the proper handling of normalized names (BZ#1791530)
+  - Add a test suite (and enable it in Fedora CI)
+  - Better error messages for unsupported package versions
+  - Fix sorting of dev versions
+
 * Tue Apr 28 2020 Miro Hrončok <mhroncok@redhat.com> - 11-4
 - Don't define global Lua variables from Python generator
 

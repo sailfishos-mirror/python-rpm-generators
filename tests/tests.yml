@@ -8,10 +8,15 @@
         state: latest
 
 - hosts: localhost
+  tags:
+    - classic
+  pre_tasks:
+  - import_role:
+      name: standard-test-source
+    vars:
+      fetch_only: True
   roles:
   - role: standard-test-basic
-    tags:
-    - classic
     tests:
     - pythonabi:
         dir: .
@@ -19,6 +24,18 @@
     - pythonname:
         dir: .
         run: ./pythonname.sh
+    - prepare-test-data:
+        dir: .
+        run: tar -xvf test-sources-*.tar.gz -C ./tests/data/scripts_pythondistdeps/
+    - pythondistdeps:
+        dir: ./tests
+        # Use update-test-sources.sh to update the test data
+        run: python3 -m pytest --capture=no -vvv
     required_packages:
     - rpm-build
     - python3-devel
+    - python3-pip
+    - python3-pytest
+    - python3-pyyaml
+    - python3-setuptools
+    - python3-wheel

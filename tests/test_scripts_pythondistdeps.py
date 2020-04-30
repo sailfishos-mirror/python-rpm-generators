@@ -37,7 +37,7 @@ import sys
 import tempfile
 import yaml
 
-PYTHONDISTDEPS_PATH = Path(__file__).parent / '..' / 'scripts' / 'pythondistdeps.py'
+PYTHONDISTDEPS_PATH = Path(__file__).parent / '..' / 'pythondistdeps.py'
 TEST_DATA_PATH = Path(__file__).parent / 'data' / 'scripts_pythondistdeps'
 
 
