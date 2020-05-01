@@ -24,6 +24,9 @@
     - pythonname:
         dir: .
         run: ./pythonname.sh
+    - pythondist:
+        dir: .
+        run: ./pythondist.sh
     - prepare-test-data:
         dir: .
         run: tar -xvf test-sources-*.tar.gz -C ./tests/data/scripts_pythondistdeps/
@@ -33,6 +36,7 @@
         run: python3 -m pytest --capture=no -vvv
     required_packages:
     - rpm-build
+    - rpmdevtools
     - python3-devel
     - python3-pip
     - python3-pytest
