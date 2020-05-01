@@ -16,13 +16,13 @@ rpm -qp --provides ${RPMDIR}/python3-foo-0-0.noarch.rpm     | grep -q '^python'$
 
 echo "Provides for python2-foo"
 rpm -qp --provides ${RPMDIR}/python2-foo-0-0.noarch.rpm
-rpm -qp --provides ${RPMDIR}/python2-foo-0-0.noarch.rpm     | grep -vq '^python-foo = 0-0$'
+rpm -qp --provides ${RPMDIR}/python2-foo-0-0.noarch.rpm     | grep -q '^python-foo = 0-0$' && exit 1 || true
 
 echo "Provides for python-foo"
 rpm -qp --provides ${RPMDIR}/python-foo-0-0.noarch.rpm
-rpm -qp --provides ${RPMDIR}/python-foo-0-0.noarch.rpm      | grep -vq '^python2-foo = 0-0$'
+rpm -qp --provides ${RPMDIR}/python-foo-0-0.noarch.rpm      | grep -q '^python2-foo = 0-0$' && exit 1 || true
 
 echo "Provides for python35-foo"
 rpm -qp --provides ${RPMDIR}/python35-foo-0-0.noarch.rpm
-rpm -qp --provides ${RPMDIR}/python35-foo-0-0.noarch.rpm    | grep -vq '^python-foo = 0-0$'
-rpm -qp --provides ${RPMDIR}/python35-foo-0-0.noarch.rpm    | grep -vq '^python3-foo = 0-0$'
+rpm -qp --provides ${RPMDIR}/python35-foo-0-0.noarch.rpm    | grep -q '^python-foo = 0-0$' && exit 1 || true
+rpm -qp --provides ${RPMDIR}/python35-foo-0-0.noarch.rpm    | grep -q '^python3-foo = 0-0$' && exit 1 || true
