@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        11
-Release:        5%{?dist}
+Release:        6%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -23,8 +23,8 @@ Summary:        %{summary}
 Requires:       python3-setuptools
 # We have parametric macro generators, we need RPM 4.16 (4.15.90+ is 4.16 alpha)
 Requires:       rpm > 4.15.90-0
-# We use %%python_provide
-Requires:       python-rpm-macros
+# This contains the Lua functions we use:
+Requires:       python-srpm-macros >= 3.8-5
 
 %description -n python3-rpm-generators
 %{summary}.
@@ -45,6 +45,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Tue May 05 2020 Miro Hrončok <mhroncok@redhat.com> - 11-6
+- Deduplicate automatically provided names trough Python RPM Lua macros
+
 * Wed Apr 29 2020 Tomas Orsava <torsava@redhat.com> - 11-5
 - Backporting proposed upstream changes
   https://github.com/rpm-software-management/rpm/pull/1195

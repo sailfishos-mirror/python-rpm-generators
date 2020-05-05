@@ -1,19 +1,18 @@
 %__pythonname_provides() %{lua:
+    local python = require 'fedora.srpm.python'
     -- this macro is called for each file in a package, the path being in %1
     -- but we don't need to know the path, so we would get for each file: Macro %1 defined but not used within scope
     -- in here, we expand %name conditionally on %1 to suppress the warning
     local name = rpm.expand('%{?1:%{name}}')
-    -- a structure that knows what names were already processed, so we can end early
-    if __pythonname_beenthere == nil then
-        __pythonname_beenthere = {}
-    end
-    -- we save ourselves a trip to %python_provide if we have already been there
-    if __pythonname_beenthere[name] == nil then
-        local python_provide = rpm.expand('%{?python_provide:%python_provide %{name}}')
-        for provides in python_provide:gmatch('Provides:[ \\t]+([^\\n]+)') do
-          print(provides .. " ")
+    local evr = rpm.expand('%{?epoch:%{epoch}:}%{version}-%{release}')
+    local provides = python.python_altprovides_once(name, evr)
+    -- provides is either an array/table or nil
+    -- nil means the function was already called with the same arguments:
+    --   either with another file in %1 or manually via %py_provide
+    if provides then
+      for i, provide in ipairs(provides) do
+          print(provide .. ' ')
         end
-        __pythonname_beenthere[name] = true
     end
 }
 

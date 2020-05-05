@@ -60,3 +60,23 @@ Summary:        ...
 ...
 %files -n ruby-foo
 /*
+
+
+%package -n python3-python_provide
+Summary:        ...
+%{?python_provide:%python_provide python3-python_provide}
+
+%description -n python3-python_provide
+...
+%files -n python3-python_provide
+/*
+
+
+%package -n python3-py_provides
+Summary:        ...
+%py_provides python3-py_provides
+
+%description -n python3-py_provides
+...
+%files -n python3-py_provides
+/*
