@@ -19,14 +19,14 @@ Summary:        ...
 %description -n python3-zope-component
 ...
 
-%package -n python37-zope-component
+%package -n python3.7-zope-component
 Summary:        ...
-%description -n python37-zope-component
+%description -n python3.7-zope-component
 ...
 
-%package -n python310-zope-component
+%package -n python3.10-zope-component
 Summary:        ...
-%description -n python310-zope-component
+%description -n python3.10-zope-component
 ...
 
 %prep
@@ -50,10 +50,10 @@ cp -a %{buildroot}%{python3_sitelib}/zope.component-%{version}-py%{python3_versi
 %license LICENSE.txt
 %{python3_sitelib}/*
 
-%files -n python37-zope-component
+%files -n python3.7-zope-component
 %license LICENSE.txt
 /usr/lib/python3.7/site-packages/zope.component-%{version}-py3.7.egg-info/
 
-%files -n python310-zope-component
+%files -n python3.10-zope-component
 %license LICENSE.txt
 /usr/lib/python3.10/site-packages/zope.component-%{version}-py3.10.egg-info/

@@ -38,19 +38,19 @@ Summary:        ...
 /*
 
 
-%package -n python%{python3_version_nodots}-foo
+%package -n python%{python3_version}-foo
 Summary:        ...
-%description -n python%{python3_version_nodots}-foo
+%description -n python%{python3_version}-foo
 ...
-%files -n python%{python3_version_nodots}-foo
+%files -n python%{python3_version}-foo
 /*
 
 
-%package -n python35-foo
+%package -n python3.5-foo
 Summary:        ...
-%description -n python35-foo
+%description -n python3.5-foo
 ...
-%files -n python35-foo
+%files -n python3.5-foo
 /*
 
 
