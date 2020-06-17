@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        11
-Release:        7%{?dist}
+Release:        8%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -45,6 +45,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondistdeps.py
 %{_rpmconfigdir}/pythondistdeps.py
 
 %changelog
+* Wed Jun 17 2020 Miro Hrončok <mhroncok@redhat.com> - 11-8
+- Fix python(abi) requires generator, it picked files from almost good directories
+
 * Thu May 21 2020 Miro Hrončok <mhroncok@redhat.com> - 11-7
 - Use PEP 503 names for requires
 
