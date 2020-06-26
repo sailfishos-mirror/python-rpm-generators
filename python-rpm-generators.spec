@@ -12,6 +12,7 @@ Source1:        python.attr
 Source2:        pythondist.attr
 Source3:        pythonname.attr
 Source4:        pythondistdeps.py
+Source5:        pythonbundles.py
 
 BuildArch:      noarch
 
@@ -35,7 +36,7 @@ cp -a %{sources} .
 
 %install
 install -Dpm0644 -t %{buildroot}%{_fileattrsdir} *.attr
-install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondistdeps.py
+install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 
 %files -n python3-rpm-generators
 %license COPYING
@@ -43,10 +44,12 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} pythondistdeps.py
 %{_fileattrsdir}/pythondist.attr
 %{_fileattrsdir}/pythonname.attr
 %{_rpmconfigdir}/pythondistdeps.py
+%{_rpmconfigdir}/pythonbundles.py
 
 %changelog
-* Wed Jun 17 2020 Miro Hrončok <mhroncok@redhat.com> - 11-8
+* Fri Jun 26 2020 Miro Hrončok <mhroncok@redhat.com> - 11-8
 - Fix python(abi) requires generator, it picked files from almost good directories
+- Add a script to generate Python bundled provides
 
 * Thu May 21 2020 Miro Hrončok <mhroncok@redhat.com> - 11-7
 - Use PEP 503 names for requires

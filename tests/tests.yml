@@ -30,7 +30,7 @@
     - prepare-test-data:
         dir: .
         run: tar -xvf test-sources-*.tar.gz -C ./tests/data/scripts_pythondistdeps/
-    - pythondistdeps:
+    - pytest:
         dir: ./tests
         # Use update-test-sources.sh to update the test data
         run: python3 -m pytest --capture=no -vvv

@@ -1,0 +1,4 @@
+Provides: bundled(python3dist(appdirs)) = 1.4.3
+Provides: bundled(python3dist(packaging)) = 16.8
+Provides: bundled(python3dist(pyparsing)) = 2.2.1
+Provides: bundled(python3dist(six)) = 1.10
