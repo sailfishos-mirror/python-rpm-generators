@@ -49,6 +49,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %changelog
 * Tue Jul 21 2020 Miro Hrončok <mhroncok@redhat.com> - 11-10
 - pythondistdeps: Split Python Extras names after the rightmost plus sign
+- pythondistdeps: Handle edge cases of version comparisons more closely to
+  upstream, despite irrationality
+  See: https://github.com/pypa/packaging/issues/320
 
 * Fri Jul 10 2020 Tomas Orsava <torsava@redhat.com> - 11-9
 - pythondistdeps: Implement provides/requires for extras packages
