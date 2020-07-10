@@ -47,7 +47,7 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
-* Wed Jun 17 2020 Tomas Orsava <torsava@redhat.com> - 11-9
+* Fri Jul 10 2020 Tomas Orsava <torsava@redhat.com> - 11-9
 - pythondistdeps: Implement provides/requires for extras packages
 - Enable --require-extras-subpackages
 

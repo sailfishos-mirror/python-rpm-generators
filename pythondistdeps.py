@@ -18,7 +18,7 @@
 from __future__ import print_function
 import argparse
 from os.path import basename, dirname, isdir, sep
-from sys import argv, stdin, version
+from sys import argv, stdin, stderr, version
 from distutils.sysconfig import get_python_lib
 from warnings import warn
 
@@ -65,11 +65,13 @@ class RpmVersion():
 
 def convert_compatible(name, operator, version_id):
     if version_id.endswith('.*'):
-        print('Invalid requirement: {} {} {}'.format(name, operator, version_id))
+        print("*** INVALID_REQUIREMENT_ERROR___SEE_STDERR ***")
+        print('Invalid requirement: {} {} {}'.format(name, operator, version_id), file=stderr)
         exit(65)  # os.EX_DATAERR
     version = RpmVersion(version_id)
     if len(version.version) == 1:
-        print('Invalid requirement: {} {} {}'.format(name, operator, version_id))
+        print("*** INVALID_REQUIREMENT_ERROR___SEE_STDERR ***")
+        print('Invalid requirement: {} {} {}'.format(name, operator, version_id), file=stderr)
         exit(65)  # os.EX_DATAERR
     upper_version = RpmVersion(version_id)
     upper_version.version.pop()
@@ -88,7 +90,8 @@ def convert_equal(name, operator, version_id):
 
 def convert_arbitrary_equal(name, operator, version_id):
     if version_id.endswith('.*'):
-        print('Invalid requirement: {} {} {}'.format(name, operator, version_id))
+        print("*** INVALID_REQUIREMENT_ERROR___SEE_STDERR ***")
+        print('Invalid requirement: {} {} {}'.format(name, operator, version_id), file=stderr)
         exit(65)  # os.EX_DATAERR
     version = RpmVersion(version_id)
     return '{} = {}'.format(name, version)
@@ -278,8 +281,9 @@ if __name__ == "__main__":
 
             # If we're processing an extras subpackage, check that the extras exists
             if extras_subpackage and extras_subpackage not in dist.extras:
+                print("*** PYTHON_EXTRAS_NOT_FOUND_ERROR___SEE_STDERR ***")
                 print(f"\nError: The package name contains an extras name `{extras_subpackage}` that was not found in the metadata.\n"
-                      "Check if the extras were removed from the project. If so, consider removing the subpackage and obsoleting it from another.")
+                      "Check if the extras were removed from the project. If so, consider removing the subpackage and obsoleting it from another.\n", file=stderr)
                 exit(65)  # os.EX_DATAERR
 
             if args.majorver_provides or args.majorver_provides_versions or \
