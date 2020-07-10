@@ -50,6 +50,7 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 * Fri Jul 10 2020 Tomas Orsava <torsava@redhat.com> - 11-9
 - pythondistdeps: Implement provides/requires for extras packages
 - Enable --require-extras-subpackages
+- Adapt Python version marker workaround for setuptools 42+
 
 * Fri Jun 26 2020 Miro Hrončok <mhroncok@redhat.com> - 11-8
 - Fix python(abi) requires generator, it picked files from almost good directories
