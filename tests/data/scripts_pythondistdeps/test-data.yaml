@@ -497,6 +497,20 @@
                 python3.9dist(simplejson) = 3.16
                 python3dist(simplejson) = 3.16
             requires: python(abi) = 3.9
+    --provides --majorver-provides-versions 3.9:
+        usr/lib/python2.7/site-packages/zope.interface-4.6.0.dist-info:
+            provides: python2.7dist(zope.interface) = 4.6
+            requires: |-
+                python(abi) = 2.7
+                python2.7dist(setuptools)
+        usr/lib64/python3.7/site-packages/lxml-4.4.0.dist-info:
+            provides: python3.7dist(lxml) = 4.4
+            requires: python(abi) = 3.7
+        usr/lib64/python3.9/site-packages/simplejson-3.16.0-py3.9.egg-info:
+            provides: |-
+                python3.9dist(simplejson) = 3.16
+                python3dist(simplejson) = 3.16
+            requires: python(abi) = 3.9
     --provides --majorver-provides-versions 3.9 --majorver-provides-versions 2.7:
         usr/lib/python2.7/site-packages/attrs-19.1.0-py2.7.egg-info:
             provides: |-
@@ -836,21 +850,6 @@
             requires: |-
                 python(abi) = 3.11
                 python3.11dist(setuptools)
-        usr/lib64/python3.7/site-packages/lxml-4.4.0.dist-info:
-            provides: python3.7dist(lxml) = 4.4
-            requires: python(abi) = 3.7
-        usr/lib64/python3.9/site-packages/simplejson-3.16.0-py3.9.egg-info:
-            provides: |-
-                python3.9dist(simplejson) = 3.16
-                python3dist(simplejson) = 3.16
-            requires: python(abi) = 3.9
-    --provides --majorver-provides-versions 3.9:
-        usr/lib/python2.7/site-packages/zope.interface-4.6.0.dist-info:
-            provides: |-
-                python2.7dist(zope.interface) = 4.6
-            requires: |-
-                python(abi) = 2.7
-                python2.7dist(setuptools)
         usr/lib64/python3.7/site-packages/lxml-4.4.0.dist-info:
             provides: python3.7dist(lxml) = 4.4
             requires: python(abi) = 3.7

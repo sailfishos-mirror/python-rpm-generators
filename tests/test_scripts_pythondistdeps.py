@@ -1,5 +1,5 @@
 # Run tests using pytest, e.g. from the root directory
-#   $ python3 -m pytest --ignore tests/testing/ -vvv
+#   $ python3 -m pytest --ignore tests/testing/ -s -vvv
 #
 # If there are any breakags, the best way to see differences is using a diff:
 #   $ diff tests/data/scripts_pythondistdeps/test-data.yaml <(python3 tests/test_scripts_pythondistdeps.py)
