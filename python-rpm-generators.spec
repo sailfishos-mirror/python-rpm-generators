@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        11
-Release:        9%{?dist}
+Release:        10%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Tue Jul 21 2020 Miro Hrončok <mhroncok@redhat.com> - 11-10
+- pythondistdeps: Split Python Extras names after the rightmost plus sign
+
 * Fri Jul 10 2020 Tomas Orsava <torsava@redhat.com> - 11-9
 - pythondistdeps: Implement provides/requires for extras packages
 - Enable --require-extras-subpackages

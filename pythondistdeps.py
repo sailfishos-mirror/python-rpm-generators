@@ -205,8 +205,15 @@ if __name__ == "__main__":
 
     # Is this script being run for an extras subpackage?
     extras_subpackage = None
-    if args.package_name:
-        package_name_parts = args.package_name.partition('+')
+    if args.package_name and '+' in args.package_name:
+        # The extras names are encoded in the package names after the + sign.
+        # We take the part after the rightmost +, ignoring when empty,
+        # this allows packages like nicotine+ or c++ to work fine.
+        # While packages with names like +spam or foo+bar would break,
+        # names started with the plus sign are not very common
+        # and pluses in the middle can be easily replaced with dashes.
+        # Python extras names don't contain pluses according to PEP 508.
+        package_name_parts = args.package_name.rpartition('+')
         extras_subpackage = package_name_parts[2] or None
 
     for f in (args.files or stdin.readlines()):
