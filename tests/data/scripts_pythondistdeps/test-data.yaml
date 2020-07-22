@@ -45,10 +45,10 @@
                 python3.9dist(foobar44) <= 2.4.8
                 python3.9dist(foobar45) <= 2.4.8
                 python3.9dist(foobar46) <= 2.4.8.1
-                python3.9dist(foobar47) <= 2.4.8
+                python3.9dist(foobar47) < 2.4.8
                 python3.9dist(foobar48) <= 2
                 python3.9dist(foobar49) <= 2
-                python3.9dist(foobar50) <= 2
+                python3.9dist(foobar50) < 2
                 python3.9dist(foobar51) <= 2.4.8~b5
                 python3.9dist(foobar52) <= 2~b5
                 python3.9dist(foobar53) <= 2.4.8^post1
@@ -80,10 +80,10 @@
                 python3.9dist(foobar78) > 2.4.8
                 python3.9dist(foobar79) > 2.4.8.1
                 (python3.9dist(foobar8) >= 2~b5 with python3.9dist(foobar8) < 2.1)
-                python3.9dist(foobar80) >= 2.4.9
+                python3.9dist(foobar80) >= 2.4.8
                 python3.9dist(foobar81) > 2
                 python3.9dist(foobar82) > 2
-                python3.9dist(foobar83) >= 3
+                python3.9dist(foobar83) >= 2
                 python3.9dist(foobar84) > 2.4.8~b5
                 python3.9dist(foobar85) > 2~b5
                 python3.9dist(foobar86) > 2.4.8^post1
