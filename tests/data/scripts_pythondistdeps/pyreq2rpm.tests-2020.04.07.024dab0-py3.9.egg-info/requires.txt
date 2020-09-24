@@ -101,4 +101,5 @@ hugo3!=11.1.1b14
 hugo4>11rc0
 hugo5===11.1.0.post3
 
+test___multiple__underscores==1
 test_underscores==1
