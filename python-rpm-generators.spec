@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        11
-Release:        11%{?dist}
+Release:        12%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Mon Oct 19 2020 Tomas Orsava <torsava@redhat.com> - 11-12
+- Run scripts in an isolated Python environment (#1889080)
+
 * Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 11-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 

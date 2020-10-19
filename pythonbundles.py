@@ -1,4 +1,4 @@
-#!/usr/bin/python3 -B
+#!/usr/bin/python3 -sB
 #                  (imports pythondistdeps from /usr/lib/rpm, hence -B)
 #
 # This program is free software.
