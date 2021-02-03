@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
-Version:        11
-Release:        13%{?dist}
+Version:        12
+Release:        1%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,10 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Wed Feb 03 2021 Miro Hrončok <mhroncok@redhat.com> - 12-1
+- Disable the dist generators for Python 2
+- https://fedoraproject.org/wiki/Changes/Disable_Python_2_Dist_RPM_Generators_and_Freeze_Python_2_Macros
+
 * Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 11-13
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
