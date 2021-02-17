@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        12
-Release:        1%{?dist}
+Release:        2%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -21,7 +21,7 @@ BuildArch:      noarch
 
 %package -n python3-rpm-generators
 Summary:        %{summary}
-Requires:       python3-setuptools
+Requires:       python3-packaging
 # We have parametric macro generators, we need RPM 4.16 (4.15.90+ is 4.16 alpha)
 Requires:       rpm > 4.15.90-0
 # This contains the Lua functions we use:
@@ -47,6 +47,11 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Wed Feb 17 2021 Tomas Orsava <torsava@redhat.com> - 12-2
+- scripts/pythondistdeps: Switch from using pkg_resources to importlib.metadata
+  for reading the egg/dist-info metadata
+- The script no longer requires setuptools but instead requires packaging
+
 * Wed Feb 03 2021 Miro Hrončok <mhroncok@redhat.com> - 12-1
 - Disable the dist generators for Python 2
 - https://fedoraproject.org/wiki/Changes/Disable_Python_2_Dist_RPM_Generators_and_Freeze_Python_2_Macros
