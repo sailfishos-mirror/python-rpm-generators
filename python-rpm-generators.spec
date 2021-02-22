@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        12
-Release:        2%{?dist}
+Release:        3%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Mon Feb 22 2021 Tomas Orsava <torsava@redhat.com> - 12-3
+- scripts/pythondistdeps: Fix for Python 3.10
+
 * Wed Feb 17 2021 Tomas Orsava <torsava@redhat.com> - 12-2
 - scripts/pythondistdeps: Switch from using pkg_resources to importlib.metadata
   for reading the egg/dist-info metadata
