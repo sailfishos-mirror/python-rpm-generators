@@ -1,4 +1,5 @@
 /test-sources-2020-04-29.tar.gz
+/__pycache__/
 /tests/__pycache__/
 /tests/data/scripts_pythondistdeps/usr/
 /test-sources-2021-03-11.tar.gz
