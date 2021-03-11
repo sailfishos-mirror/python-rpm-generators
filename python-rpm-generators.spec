@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        12
-Release:        3%{?dist}
+Release:        4%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,10 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Thu Mar 11 2021 Tomas Orsava <torsava@redhat.com> - 12-4
+- scripts/pythondistdeps: Treat extras names case-insensitively and always
+  output them in lower case (#1936875)
+
 * Mon Feb 22 2021 Tomas Orsava <torsava@redhat.com> - 12-3
 - scripts/pythondistdeps: Fix for Python 3.10
 
