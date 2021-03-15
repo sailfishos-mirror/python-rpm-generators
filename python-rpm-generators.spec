@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        12
-Release:        4%{?dist}
+Release:        5%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,10 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Wed Mar 31 2021 Miro Hrončok <mhroncok@redhat.com> - 12-5
+- Do not generate setuptools requirement for console_scripts on Python 3.10+
+- See https://fedoraproject.org/wiki/Changes/Reduce_dependencies_on_python3-setuptools
+
 * Thu Mar 11 2021 Tomas Orsava <torsava@redhat.com> - 12-4
 - scripts/pythondistdeps: Treat extras names case-insensitively and always
   output them in lower case (#1936875)

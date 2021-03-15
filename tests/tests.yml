@@ -27,6 +27,9 @@
     - pythondist:
         dir: .
         run: ./pythondist.sh
+    - console_script:
+        dir: .
+        run: ./console_script.sh
     - prepare-test-data:
         dir: .
         run: tar -xvf test-sources-*.tar.gz -C ./tests/data/scripts_pythondistdeps/
