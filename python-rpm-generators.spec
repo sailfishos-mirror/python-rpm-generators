@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        12
-Release:        6%{?dist}
+Release:        7%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,10 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Tue May 25 2021 Tomas Orsava <torsava@redhat.com> - 12-7
+- pythondistdeps.py: Detect missing or corrupted metadata
+- pythondistdeps.py: Catch all exceptions and terminate the build if one is raised
+
 * Mon Apr 19 2021 Miro Hrončok <mhroncok@redhat.com> - 12-6
 - Get rid of distutils deprecation warning (by not using it)
 - The distutils module is deprecated in Python 3.10+
