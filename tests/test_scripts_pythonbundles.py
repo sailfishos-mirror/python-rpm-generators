@@ -34,7 +34,7 @@ def run_pythonbundles(*args, success=True):
     return cp
 
 
-projects = pytest.mark.parametrize('project', ('pkg_resources', 'pip', 'pipenv'))
+projects = pytest.mark.parametrize('project', ('pkg_resources', 'pip', 'pipenv', 'setuptools'))
 
 
 @projects
@@ -97,3 +97,23 @@ def test_compare_with_unexpected(project):
     cp = run_pythonbundles(TEST_DATA / f'{project}.in', '--compare-with', longer, success=False)
     assert cp.stdout == '', cp.stdout
     assert cp.stderr == f'Redundant unexpected provides:\n    + {unexpected}\n', cp.stderr
+
+
+combo_order = pytest.mark.parametrize('projects', ['pkg_resources-setuptools', 'setuptools-pkg_resources'])
+
+
+@combo_order
+def test_multiple_vendor_files_output(projects):
+    cp = run_pythonbundles(*(TEST_DATA / f'{p}.in' for p in projects.split('-')))
+    expected = (TEST_DATA / 'pkg_resources_setuptools.out').read_text()
+    assert cp.stdout == expected, cp.stdout
+    assert cp.stderr == '', cp.stderr
+
+
+@combo_order
+def test_multiple_vendor_files_compare_with(projects):
+    expected = (TEST_DATA / 'pkg_resources_setuptools.out').read_text()
+    cp = run_pythonbundles(*(TEST_DATA / f'{p}.in' for p in projects.split('-')),
+                           '--compare-with', expected)
+    assert cp.stdout == '', cp.stdout
+    assert cp.stderr == '', cp.stderr

@@ -22,26 +22,27 @@ import pythondistdeps
 pythondistdeps.parse_version = parse_version
 
 
-def generate_bundled_provides(path, namespace):
+def generate_bundled_provides(paths, namespace):
     provides = set()
 
-    for line in path.read_text().splitlines():
-        line, _, comment = line.partition('#')
-        if comment.startswith('egg='):
-            # not a real comment
-            # e.g. git+https://github.com/monty/spam.git@master#egg=spam&...
-            egg, *_ = comment.strip().partition(' ')
-            egg, *_ = egg.strip().partition('&')
-            name = pythondistdeps.normalize_name(egg[4:])
-            provides.add(f'Provides: bundled({namespace}({name}))')
-            continue
-        line = line.strip()
-        if line:
-            name, _, version = line.partition('==')
-            name = pythondistdeps.normalize_name(name)
-            bundled_name = f"bundled({namespace}({name}))"
-            python_provide = pythondistdeps.convert(bundled_name, '==', version)
-            provides.add(f'Provides: {python_provide}')
+    for path in paths:
+        for line in path.read_text().splitlines():
+            line, _, comment = line.partition('#')
+            if comment.startswith('egg='):
+                # not a real comment
+                # e.g. git+https://github.com/monty/spam.git@master#egg=spam&...
+                egg, *_ = comment.strip().partition(' ')
+                egg, *_ = egg.strip().partition('&')
+                name = pythondistdeps.normalize_name(egg[4:])
+                provides.add(f'Provides: bundled({namespace}({name}))')
+                continue
+            line = line.strip()
+            if line:
+                name, _, version = line.partition('==')
+                name = pythondistdeps.normalize_name(name)
+                bundled_name = f"bundled({namespace}({name}))"
+                python_provide = pythondistdeps.convert(bundled_name, '==', version)
+                provides.add(f'Provides: {python_provide}')
 
     return provides
 
@@ -70,7 +71,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(prog=sys.argv[0],
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('vendored', metavar='VENDORED.TXT',
+    parser.add_argument('vendored', metavar='VENDORED.TXT', nargs='+', type=pathlib.Path,
                         help='Upstream information about vendored libraries')
     parser.add_argument('-c', '--compare-with', action='store',
                         help='A string value to compare with and verify')
@@ -78,7 +79,7 @@ if __name__ == '__main__':
                         help='What namespace of provides will used', default='python3dist')
     args = parser.parse_args()
 
-    provides = generate_bundled_provides(pathlib.Path(args.vendored), args.namespace)
+    provides = generate_bundled_provides(args.vendored, args.namespace)
 
     if args.compare_with:
         given = args.compare_with.splitlines()
