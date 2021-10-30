@@ -28,7 +28,7 @@
                 python2.7dist(setuptools) >= 21
                 python2.7dist(six) >= 1.9
                 python2.7dist(urllib3) >= 1.24.2
-                ((python2.7dist(websocket-client) < 0.40 or python2.7dist(websocket-client) > 0.40) with (python2.7dist(websocket-client) < 0.41~ or python2.7dist(websocket-client) >= 0.42) with (python2.7dist(websocket-client) < 0.42~ or python2.7dist(websocket-client) >= 0.43) with python2.7dist(websocket-client) >= 0.32)
+                ((python2.7dist(websocket-client) < 0.40 or python2.7dist(websocket-client) > 0.40) with (python2.7dist(websocket-client) < 0.41~~ or python2.7dist(websocket-client) >= 0.42) with (python2.7dist(websocket-client) < 0.42~~ or python2.7dist(websocket-client) >= 0.43) with python2.7dist(websocket-client) >= 0.32)
         usr/lib/python2.7/site-packages/mistune-0.8.4-py2.7.egg-info:
             provides: |-
                 python2.7dist(mistune) = 0.8.4
@@ -75,12 +75,12 @@
                 python2dist(tox) = 3.14
             requires: |-
                 python(abi) = 2.7
-                (python2.7dist(filelock) < 4~ with python2.7dist(filelock) >= 3)
-                (python2.7dist(importlib-metadata) < 1~ with python2.7dist(importlib-metadata) >= 0.12)
+                (python2.7dist(filelock) < 4~~ with python2.7dist(filelock) >= 3)
+                (python2.7dist(importlib-metadata) < 1~~ with python2.7dist(importlib-metadata) >= 0.12)
                 python2.7dist(packaging) >= 14
-                (python2.7dist(pluggy) < 1~ with python2.7dist(pluggy) >= 0.12)
-                (python2.7dist(py) < 2~ with python2.7dist(py) >= 1.4.17)
-                (python2.7dist(six) < 2~ with python2.7dist(six) >= 1)
+                (python2.7dist(pluggy) < 1~~ with python2.7dist(pluggy) >= 0.12)
+                (python2.7dist(py) < 2~~ with python2.7dist(py) >= 1.4.17)
+                (python2.7dist(six) < 2~~ with python2.7dist(six) >= 1)
                 python2.7dist(toml) >= 0.9.4
                 python2.7dist(virtualenv) >= 14
         usr/lib/python2.7/site-packages/urllib3-1.25.7-py2.7.egg-info:
@@ -105,7 +105,7 @@
                 python(abi) = 3.7
                 (python3.7dist(lazy-object-proxy) >= 1.4 with python3.7dist(lazy-object-proxy) < 1.5)
                 (python3.7dist(six) >= 1.12 with python3.7dist(six) < 2)
-                (python3.7dist(typed-ast) < 1.5~ with python3.7dist(typed-ast) >= 1.4)
+                (python3.7dist(typed-ast) < 1.5~~ with python3.7dist(typed-ast) >= 1.4)
                 (python3.7dist(wrapt) >= 1.11 with python3.7dist(wrapt) < 1.12)
         usr/lib/python3.7/site-packages/packaging-19.0.dist-info:
             provides: |-
@@ -148,12 +148,12 @@
                 python3dist(tox) = 3.14
             requires: |-
                 python(abi) = 3.7
-                (python3.7dist(filelock) < 4~ with python3.7dist(filelock) >= 3)
-                (python3.7dist(importlib-metadata) < 1~ with python3.7dist(importlib-metadata) >= 0.12)
+                (python3.7dist(filelock) < 4~~ with python3.7dist(filelock) >= 3)
+                (python3.7dist(importlib-metadata) < 1~~ with python3.7dist(importlib-metadata) >= 0.12)
                 python3.7dist(packaging) >= 14
-                (python3.7dist(pluggy) < 1~ with python3.7dist(pluggy) >= 0.12)
-                (python3.7dist(py) < 2~ with python3.7dist(py) >= 1.4.17)
-                (python3.7dist(six) < 2~ with python3.7dist(six) >= 1)
+                (python3.7dist(pluggy) < 1~~ with python3.7dist(pluggy) >= 0.12)
+                (python3.7dist(py) < 2~~ with python3.7dist(py) >= 1.4.17)
+                (python3.7dist(six) < 2~~ with python3.7dist(six) >= 1)
                 python3.7dist(toml) >= 0.9.4
                 python3.7dist(virtualenv) >= 14
         usr/lib/python3.9/site-packages/astroid-2.3.3.dist-info:
@@ -205,7 +205,7 @@
                 python3.9dist(setuptools) >= 21
                 python3.9dist(six) >= 1.9
                 python3.9dist(urllib3) >= 1.24.2
-                ((python3.9dist(websocket-client) < 0.40 or python3.9dist(websocket-client) > 0.40) with (python3.9dist(websocket-client) < 0.41~ or python3.9dist(websocket-client) >= 0.42) with (python3.9dist(websocket-client) < 0.42~ or python3.9dist(websocket-client) >= 0.43) with python3.9dist(websocket-client) >= 0.32)
+                ((python3.9dist(websocket-client) < 0.40 or python3.9dist(websocket-client) > 0.40) with (python3.9dist(websocket-client) < 0.41~~ or python3.9dist(websocket-client) >= 0.42) with (python3.9dist(websocket-client) < 0.42~~ or python3.9dist(websocket-client) >= 0.43) with python3.9dist(websocket-client) >= 0.32)
         usr/lib/python3.9/site-packages/mistune-0.8.4-py3.9.egg-info:
             provides: |-
                 python3.9dist(mistune) = 0.8.4
@@ -260,11 +260,11 @@
                 python3dist(tox) = 3.14
             requires: |-
                 python(abi) = 3.9
-                (python3.9dist(filelock) < 4~ with python3.9dist(filelock) >= 3)
+                (python3.9dist(filelock) < 4~~ with python3.9dist(filelock) >= 3)
                 python3.9dist(packaging) >= 14
-                (python3.9dist(pluggy) < 1~ with python3.9dist(pluggy) >= 0.12)
-                (python3.9dist(py) < 2~ with python3.9dist(py) >= 1.4.17)
-                (python3.9dist(six) < 2~ with python3.9dist(six) >= 1)
+                (python3.9dist(pluggy) < 1~~ with python3.9dist(pluggy) >= 0.12)
+                (python3.9dist(py) < 2~~ with python3.9dist(py) >= 1.4.17)
+                (python3.9dist(six) < 2~~ with python3.9dist(six) >= 1)
                 python3.9dist(toml) >= 0.9.4
                 python3.9dist(virtualenv) >= 14
         usr/lib/python3.9/site-packages/urllib3-1.25.7-py3.9.egg-info:
@@ -437,7 +437,7 @@
                 python2.7dist(setuptools) >= 21
                 python2.7dist(six) >= 1.9
                 python2.7dist(urllib3) >= 1.24.2
-                ((python2.7dist(websocket-client) < 0.40 or python2.7dist(websocket-client) > 0.40) with (python2.7dist(websocket-client) < 0.41~ or python2.7dist(websocket-client) >= 0.42) with (python2.7dist(websocket-client) < 0.42~ or python2.7dist(websocket-client) >= 0.43) with python2.7dist(websocket-client) >= 0.32)
+                ((python2.7dist(websocket-client) < 0.40 or python2.7dist(websocket-client) > 0.40) with (python2.7dist(websocket-client) < 0.41~~ or python2.7dist(websocket-client) >= 0.42) with (python2.7dist(websocket-client) < 0.42~~ or python2.7dist(websocket-client) >= 0.43) with python2.7dist(websocket-client) >= 0.32)
         usr/lib/python2.7/site-packages/mistune-0.8.4-py2.7.egg-info:
             provides: |-
                 python2.7dist(mistune) = 0.8.4
@@ -489,7 +489,7 @@
                 python(abi) = 3.7
                 (python3.7dist(lazy-object-proxy) >= 1.4 with python3.7dist(lazy-object-proxy) < 1.5)
                 (python3.7dist(six) >= 1.12 with python3.7dist(six) < 2)
-                (python3.7dist(typed-ast) < 1.5~ with python3.7dist(typed-ast) >= 1.4)
+                (python3.7dist(typed-ast) < 1.5~~ with python3.7dist(typed-ast) >= 1.4)
                 (python3.7dist(wrapt) >= 1.11 with python3.7dist(wrapt) < 1.12)
         usr/lib/python3.7/site-packages/packaging-19.0.dist-info:
             provides: python3.7dist(packaging) = 19
@@ -554,11 +554,11 @@
                 python3dist(tox) = 3.14
             requires: |-
                 python(abi) = 3.9
-                (python3.9dist(filelock) < 4~ with python3.9dist(filelock) >= 3)
+                (python3.9dist(filelock) < 4~~ with python3.9dist(filelock) >= 3)
                 python3.9dist(packaging) >= 14
-                (python3.9dist(pluggy) < 1~ with python3.9dist(pluggy) >= 0.12)
-                (python3.9dist(py) < 2~ with python3.9dist(py) >= 1.4.17)
-                (python3.9dist(six) < 2~ with python3.9dist(six) >= 1)
+                (python3.9dist(pluggy) < 1~~ with python3.9dist(pluggy) >= 0.12)
+                (python3.9dist(py) < 2~~ with python3.9dist(py) >= 1.4.17)
+                (python3.9dist(six) < 2~~ with python3.9dist(six) >= 1)
                 python3.9dist(toml) >= 0.9.4
                 python3.9dist(virtualenv) >= 14
         usr/lib/python3.9/site-packages/urllib3-1.25.7-py3.9.egg-info:
@@ -611,12 +611,12 @@
                 python2dist(tox) = 3.14
             requires: |-
                 python(abi) = 2.7
-                (python2.7dist(filelock) < 4~ with python2.7dist(filelock) >= 3)
-                (python2.7dist(importlib-metadata) < 1~ with python2.7dist(importlib-metadata) >= 0.12)
+                (python2.7dist(filelock) < 4~~ with python2.7dist(filelock) >= 3)
+                (python2.7dist(importlib-metadata) < 1~~ with python2.7dist(importlib-metadata) >= 0.12)
                 python2.7dist(packaging) >= 14
-                (python2.7dist(pluggy) < 1~ with python2.7dist(pluggy) >= 0.12)
-                (python2.7dist(py) < 2~ with python2.7dist(py) >= 1.4.17)
-                (python2.7dist(six) < 2~ with python2.7dist(six) >= 1)
+                (python2.7dist(pluggy) < 1~~ with python2.7dist(pluggy) >= 0.12)
+                (python2.7dist(py) < 2~~ with python2.7dist(py) >= 1.4.17)
+                (python2.7dist(six) < 2~~ with python2.7dist(six) >= 1)
                 python2.7dist(toml) >= 0.9.4
                 python2.7dist(virtualenv) >= 14
         usr/lib/python2.7/site-packages/urllib3-1.25.7-py2.7.egg-info:
@@ -653,12 +653,12 @@
             provides: python3.7dist(tox) = 3.14
             requires: |-
                 python(abi) = 3.7
-                (python3.7dist(filelock) < 4~ with python3.7dist(filelock) >= 3)
-                (python3.7dist(importlib-metadata) < 1~ with python3.7dist(importlib-metadata) >= 0.12)
+                (python3.7dist(filelock) < 4~~ with python3.7dist(filelock) >= 3)
+                (python3.7dist(importlib-metadata) < 1~~ with python3.7dist(importlib-metadata) >= 0.12)
                 python3.7dist(packaging) >= 14
-                (python3.7dist(pluggy) < 1~ with python3.7dist(pluggy) >= 0.12)
-                (python3.7dist(py) < 2~ with python3.7dist(py) >= 1.4.17)
-                (python3.7dist(six) < 2~ with python3.7dist(six) >= 1)
+                (python3.7dist(pluggy) < 1~~ with python3.7dist(pluggy) >= 0.12)
+                (python3.7dist(py) < 2~~ with python3.7dist(py) >= 1.4.17)
+                (python3.7dist(six) < 2~~ with python3.7dist(six) >= 1)
                 python3.7dist(toml) >= 0.9.4
                 python3.7dist(virtualenv) >= 14
         usr/lib64/python2.7/site-packages/scipy-1.2.1.dist-info:
@@ -1251,10 +1251,10 @@
                 (python3.9dist(foobar33) < 2.4.8 or python3.9dist(foobar33) > 2.4.8)
                 (python3.9dist(foobar34) < 2.4.8 or python3.9dist(foobar34) > 2.4.8)
                 (python3.9dist(foobar35) < 2.4.8.1 or python3.9dist(foobar35) > 2.4.8.1)
-                (python3.9dist(foobar36) < 2.4.8~ or python3.9dist(foobar36) >= 2.4.9)
+                (python3.9dist(foobar36) < 2.4.8~~ or python3.9dist(foobar36) >= 2.4.9)
                 (python3.9dist(foobar37) < 2 or python3.9dist(foobar37) > 2)
                 (python3.9dist(foobar38) < 2 or python3.9dist(foobar38) > 2)
-                (python3.9dist(foobar39) < 2~ or python3.9dist(foobar39) >= 3)
+                (python3.9dist(foobar39) < 2~~ or python3.9dist(foobar39) >= 3)
                 (python3.9dist(foobar4) >= 2 with python3.9dist(foobar4) < 3)
                 (python3.9dist(foobar40) < 2.4.8~b5 or python3.9dist(foobar40) > 2.4.8~b5)
                 (python3.9dist(foobar41) < 2~b5 or python3.9dist(foobar41) > 2~b5)
@@ -1263,21 +1263,21 @@
                 python3.9dist(foobar44) <= 2.4.8
                 python3.9dist(foobar45) <= 2.4.8
                 python3.9dist(foobar46) <= 2.4.8.1
-                python3.9dist(foobar47) < 2.4.8~
+                python3.9dist(foobar47) < 2.4.8~~
                 python3.9dist(foobar48) <= 2
                 python3.9dist(foobar49) <= 2
-                python3.9dist(foobar50) < 2~
+                python3.9dist(foobar50) < 2~~
                 python3.9dist(foobar51) <= 2.4.8~b5
                 python3.9dist(foobar52) <= 2~b5
                 python3.9dist(foobar53) <= 2.4.8^post1
                 python3.9dist(foobar54) <= 2^post1
-                python3.9dist(foobar55) < 2.4.8~
-                python3.9dist(foobar56) < 2.4.8~
-                python3.9dist(foobar57) < 2.4.8.1~
-                python3.9dist(foobar58) < 2.4.8~
-                python3.9dist(foobar59) < 2~
-                python3.9dist(foobar60) < 2~
-                python3.9dist(foobar61) < 2~
+                python3.9dist(foobar55) < 2.4.8~~
+                python3.9dist(foobar56) < 2.4.8~~
+                python3.9dist(foobar57) < 2.4.8.1~~
+                python3.9dist(foobar58) < 2.4.8~~
+                python3.9dist(foobar59) < 2~~
+                python3.9dist(foobar60) < 2~~
+                python3.9dist(foobar61) < 2~~
                 python3.9dist(foobar62) < 2.4.8~b5
                 python3.9dist(foobar63) < 2~b5
                 python3.9dist(foobar64) < 2.4.8^post1

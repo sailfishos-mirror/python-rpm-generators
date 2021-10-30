@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        12
-Release:        9%{?dist}
+Release:        10%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Fri Oct 29 2021 Gordon Messmer <gordon.messmer@gmail.com> - 12-10
+- Additional fix for dev releases.
+
 * Thu Oct 28 2021 Gordon Messmer <gordon.messmer@gmail.com> - 12-9
 - Sync dependency conversion with upstream pyreq2rpm.
 - Improve handling of > and < operators, and != operator with prefix matching
