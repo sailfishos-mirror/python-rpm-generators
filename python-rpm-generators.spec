@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        12
-Release:        12%{?dist}
+Release:        13%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -25,7 +25,7 @@ Requires:       python3-packaging
 # We have parametric macro generators, we need RPM 4.16 (4.15.90+ is 4.16 alpha)
 Requires:       rpm > 4.15.90-0
 # This contains the Lua functions we use:
-Requires:       python-srpm-macros >= 3.8-5
+Requires:       python-srpm-macros >= 3.10-15
 
 %description -n python3-rpm-generators
 %{summary}.
@@ -47,6 +47,10 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Wed Jan 26 2022 Tomas Orsava <torsava@redhat.com> - 12-13
+- From `python3-foo` packages automatically generate `python3.X-foo` Obsoletes
+  tags on CentOS/RHEL
+
 * Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 12-12
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
