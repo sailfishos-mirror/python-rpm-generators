@@ -8,7 +8,7 @@
     local provides = python.python_altprovides_once(name, evr)
     -- provides is either an array/table or nil
     -- nil means the function was already called with the same arguments:
-    --   either with another file in %1 or manually via %py_provide
+    --   either with another file in %1 or manually via %py_provides
     if provides then
       for i, provide in ipairs(provides) do
           print(provide .. ' ')
