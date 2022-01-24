@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
 Version:        12
-Release:        13%{?dist}
+Release:        14%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Thu Feb 10 2022 Sandro Mani <manisandro@gmail.com> - 12-14
+- Add namespace option to pythodistdeps.py to allow mingw-python generatros
+
 * Wed Jan 26 2022 Tomas Orsava <torsava@redhat.com> - 12-13
 - From `python3-foo` packages automatically generate `python3.X-foo` Obsoletes
   tags on CentOS/RHEL

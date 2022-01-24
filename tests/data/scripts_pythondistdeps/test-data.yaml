@@ -762,6 +762,14 @@
                 python3.9dist(simplejson) = 3.16
                 python3dist(simplejson) = 3.16
             requires: python(abi) = 3.9
+--requires --namespace mingw64:
+    --provides --namespace mingw64:
+        usr/lib/python3.9/site-packages/taskotron_python_versions-0.1.dev6.dist-info:
+            provides: mingw64(python3.9dist(taskotron-python-versions)) = 0.1~~dev6
+            requires: |-
+                mingw64(python(abi)) = 3.9
+                mingw64(python3.9dist(libarchive-c))
+                mingw64(python3.9dist(python-bugzilla))
 --requires --console-scripts-nodep-setuptools-since 3.7:
     --provides --console-scripts-nodep-setuptools-since 3.6:
         usr/lib/python3.9/site-packages/zope.component-4.3.0-py3.9.egg-info:

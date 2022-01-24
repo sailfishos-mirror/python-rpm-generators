@@ -326,6 +326,7 @@ def main():
     parser.add_argument('--require-extras-subpackages', action='store_true',
                         help="If there is a dependency on a package with extras functionality, require the extras subpackage")
     parser.add_argument('--package-name', action='store', help="Name of the RPM package that's being inspected. Required for extras requires/provides to work.")
+    parser.add_argument('--namespace', action='store', help="Namespace for the printed Requires, Provides, Recommends and Conflicts")
     parser.add_argument('files', nargs=argparse.REMAINDER, help="Files from the RPM package that are to be inspected, can also be supplied on stdin")
     args = parser.parse_args()
 
@@ -373,6 +374,8 @@ def main():
         # Python extras names don't contain pluses according to PEP 508.
         package_name_parts = args.package_name.rpartition('+')
         extras_subpackage = package_name_parts[2].lower() or None
+
+    namespace = (args.namespace + "({})") if args.namespace else "{}"
 
     for f in (args.files or stdin.readlines()):
         f = f.strip()
@@ -430,31 +433,31 @@ def main():
                 extras_suffix = f"[{extras_subpackage}]" if extras_subpackage else ""
                 # If egg/dist metadata says package name is python, we provide python(abi)
                 if dist.normalized_name == 'python':
-                    name = 'python(abi)'
+                    name = namespace.format('python(abi)')
                     if name not in py_deps:
                         py_deps[name] = []
                     py_deps[name].append(('==', dist.py_version))
                 if not args.legacy or not args.majorver_only:
                     if normalized_names_provide_legacy:
-                        name = 'python{}dist({}{})'.format(dist.py_version, dist.legacy_normalized_name, extras_suffix)
+                        name = namespace.format('python{}dist({}{})').format(dist.py_version, dist.legacy_normalized_name, extras_suffix)
                         if name not in py_deps:
                             py_deps[name] = []
                     if normalized_names_provide_pep503:
-                        name_ = 'python{}dist({}{})'.format(dist.py_version, dist.normalized_name, extras_suffix)
+                        name_ = namespace.format('python{}dist({}{})').format(dist.py_version, dist.normalized_name, extras_suffix)
                         if name_ not in py_deps:
                             py_deps[name_] = []
                 if args.majorver_provides or args.majorver_only or \
                         (args.majorver_provides_versions and dist.py_version in args.majorver_provides_versions):
                     if normalized_names_provide_legacy:
-                        pymajor_name = 'python{}dist({}{})'.format(pyver_major, dist.legacy_normalized_name, extras_suffix)
+                        pymajor_name = namespace.format('python{}dist({}{})').format(pyver_major, dist.legacy_normalized_name, extras_suffix)
                         if pymajor_name not in py_deps:
                             py_deps[pymajor_name] = []
                     if normalized_names_provide_pep503:
-                        pymajor_name_ = 'python{}dist({}{})'.format(pyver_major, dist.normalized_name, extras_suffix)
+                        pymajor_name_ = namespace.format('python{}dist({}{})').format(pyver_major, dist.normalized_name, extras_suffix)
                         if pymajor_name_ not in py_deps:
                             py_deps[pymajor_name_] = []
                 if args.legacy or args.legacy_provides:
-                    legacy_name = 'pythonegg({})({})'.format(pyver_major, dist.legacy_normalized_name)
+                    legacy_name = namespace.format('pythonegg({})({})').format(pyver_major, dist.legacy_normalized_name)
                     if legacy_name not in py_deps:
                         py_deps[legacy_name] = []
                 if dist.version:
@@ -477,7 +480,7 @@ def main():
                         if spec not in py_deps[legacy_name]:
                             py_deps[legacy_name].append(spec)
             if args.requires or (args.recommends and dist.extras):
-                name = 'python(abi)'
+                name = namespace.format('python(abi)')
                 # If egg/dist metadata says package name is python, we don't add dependency on python(abi)
                 if dist.normalized_name == 'python':
                     py_abi = False
@@ -524,12 +527,12 @@ def main():
                             dep_normalized_name = dep.legacy_normalized_name
 
                         if args.legacy:
-                            name = 'pythonegg({})({})'.format(pyver_major, dep.legacy_normalized_name)
+                            name = namespace.format('pythonegg({})({})').format(pyver_major, dep.legacy_normalized_name)
                         else:
                             if args.majorver_only:
-                                name = 'python{}dist({}{})'.format(pyver_major, dep_normalized_name, extras_suffix)
+                                name = namespace.format('python{}dist({}{})').format(pyver_major, dep_normalized_name, extras_suffix)
                             else:
-                                name = 'python{}dist({}{})'.format(dist.py_version, dep_normalized_name, extras_suffix)
+                                name = namespace.format('python{}dist({}{})').format(dist.py_version, dep_normalized_name, extras_suffix)
 
                         if dep.marker and not args.recommends and not extras_subpackage:
                             if not dep.marker.evaluate(get_marker_env(dist, '')):
