@@ -1,7 +1,7 @@
 Name:           python-rpm-generators
 Summary:        Dependency generators for Python RPMs
-Version:        12
-Release:        15%{?dist}
+Version:        13
+Release:        1%{?dist}
 
 # Originally all those files were part of RPM, so license is kept here
 License:        GPLv2+
@@ -47,6 +47,9 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %{_rpmconfigdir}/pythonbundles.py
 
 %changelog
+* Thu Jun 02 2022 Miro Hrončok <mhroncok@redhat.com> - 13-1
+- https://fedoraproject.org/wiki/Changes/PythonDistPEP503ProvidesOnly
+
 * Fri May 27 2022 Miro Hrončok <mhroncok@redhat.com> - 12-15
 - Don't include all requirements with True-evaluating markers in extras subpackages
 - Fixes: rhbz#2090186
