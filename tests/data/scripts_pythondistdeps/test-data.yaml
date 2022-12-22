@@ -1362,4 +1362,39 @@
             requires: |-
                 python(abi) = 3.10
                 python3.10dist(virtualenv) >= 20.0.35
-
+--requires --fail-if-zero:
+    --provides --majorver-provides --fail-if-zero:
+        usr/lib/python3.11/site-packages/importlib_metadata-0.0-py3.11.egg-info:
+            stderr:
+                provides: |-
+                    Error: The version in the Python package metadata 0.0 normalizes to zero.
+                    It's likely a packaging error caused by missing version information
+                    (e.g. when using a version control system snapshot as a source).
+                    Try providing the version information manually when building the Python package,
+                    for example by setting the SETUPTOOLS_SCM_PRETEND_VERSION environment variable if the package uses setuptools_scm.
+                    If you are confident that the version of the Python package is intentionally zero,
+                    you may %define the _python_dist_allow_version_zero macro in the spec file to disable this check.
+                requires: '*error: --fail-if-zero only works with --provides*'
+            stdout:
+                provides: '*** PYTHON_PROVIDED_VERSION_NORMALIZES_TO_ZERO___SEE_STDERR ***'
+                requires: ''
+--requires:
+    --provides --majorver-provides:
+        usr/lib/python3.11/site-packages/importlib_metadata-0.0-py3.11.egg-info:
+            provides: |-
+                python3.11dist(importlib-metadata) = 0
+                python3dist(importlib-metadata) = 0
+            requires: |-
+                python(abi) = 3.11
+                python3.11dist(setuptools)
+                python3.11dist(wheel)
+--requires:
+    --provides --majorver-provides --fail-if-zero:
+        usr/lib/python3.11/site-packages/importlib_metadata-0.1-py3.11.egg-info:
+            provides: |-
+                python3.11dist(importlib-metadata) = 0.1
+                python3dist(importlib-metadata) = 0.1
+            requires: |-
+                python(abi) = 3.11
+                python3.11dist(setuptools)
+                python3.11dist(wheel)

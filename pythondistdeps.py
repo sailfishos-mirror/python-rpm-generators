@@ -155,6 +155,9 @@ class RpmVersion():
         self.post = None
         return self
 
+    def is_zero(self):
+        return self.__str__() == '0'
+
     def __str__(self):
         if self.is_legacy():
             return self.version
@@ -334,8 +337,12 @@ def main():
                         help="If there is a dependency on a package with extras functionality, require the extras subpackage")
     parser.add_argument('--package-name', action='store', help="Name of the RPM package that's being inspected. Required for extras requires/provides to work.")
     parser.add_argument('--namespace', action='store', help="Namespace for the printed Requires, Provides, Recommends and Conflicts")
+    parser.add_argument('--fail-if-zero', action='store_true', help='Fail the script if the automatically generated Provides version was 0, which usually indicates a packaging error.')
     parser.add_argument('files', nargs=argparse.REMAINDER, help="Files from the RPM package that are to be inspected, can also be supplied on stdin")
     args = parser.parse_args()
+
+    if args.fail_if_zero and not args.provides:
+        raise parser.error('--fail-if-zero only works with --provides')
 
     py_abi = args.requires
     py_deps = {}
@@ -470,6 +477,17 @@ def main():
                 if dist.version:
                     version = dist.version
                     spec = ('==', version)
+                    if args.fail_if_zero:
+                        if RpmVersion(version).is_zero():
+                            print('*** PYTHON_PROVIDED_VERSION_NORMALIZES_TO_ZERO___SEE_STDERR ***')
+                            print(f'\nError: The version in the Python package metadata {version} normalizes to zero.\n'
+                                  'It\'s likely a packaging error caused by missing version information\n'
+                                  '(e.g. when using a version control system snapshot as a source).\n'
+                                  'Try providing the version information manually when building the Python package,\n'
+                                  'for example by setting the SETUPTOOLS_SCM_PRETEND_VERSION environment variable if the package uses setuptools_scm.\n'
+                                  'If you are confident that the version of the Python package is intentionally zero,\n'
+                                  'you may %define the _python_dist_allow_version_zero macro in the spec file to disable this check.\n', file=stderr)
+                            exit(65)  # os.EX_DATAERR
 
                     if normalized_names_provide_legacy:
                         if spec not in py_deps[name]:
