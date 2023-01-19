@@ -1224,8 +1224,8 @@
             stdout:
                 provides: '*** PYTHON_METADATA_FAILED_TO_PARSE_ERROR___SEE_STDERR ***'
                 requires: '*** PYTHON_METADATA_FAILED_TO_PARSE_ERROR___SEE_STDERR ***'
-        pyreq2rpm.tests-2020.04.07.024dab0-py3.9.egg-info:
-            provides: python3.9dist(pyreq2rpm-tests) = 2020.04.07.024dab0
+        pyreq2rpm.tests-2020.04.07.024-py3.9.egg-info:
+            provides: python3.9dist(pyreq2rpm-tests) = 2020.4.7.24
             requires: |-
                 python(abi) = 3.9
                 ((python3.9dist(babel) < 2 or python3.9dist(babel) > 2) with python3.9dist(babel) >= 1.3)
@@ -1271,10 +1271,8 @@
                 python3.9dist(foobar44) <= 2.4.8
                 python3.9dist(foobar45) <= 2.4.8
                 python3.9dist(foobar46) <= 2.4.8.1
-                python3.9dist(foobar47) < 2.4.8~~
                 python3.9dist(foobar48) <= 2
                 python3.9dist(foobar49) <= 2
-                python3.9dist(foobar50) < 2~~
                 python3.9dist(foobar51) <= 2.4.8~b5
                 python3.9dist(foobar52) <= 2~b5
                 python3.9dist(foobar53) <= 2.4.8^post1
@@ -1282,10 +1280,8 @@
                 python3.9dist(foobar55) < 2.4.8~~
                 python3.9dist(foobar56) < 2.4.8~~
                 python3.9dist(foobar57) < 2.4.8.1~~
-                python3.9dist(foobar58) < 2.4.8~~
                 python3.9dist(foobar59) < 2~~
                 python3.9dist(foobar60) < 2~~
-                python3.9dist(foobar61) < 2~~
                 python3.9dist(foobar62) < 2.4.8~b5
                 python3.9dist(foobar63) < 2~b5
                 python3.9dist(foobar64) < 2.4.8^post1
@@ -1293,11 +1289,9 @@
                 python3.9dist(foobar66) >= 2.4.8
                 python3.9dist(foobar67) >= 2.4.8
                 python3.9dist(foobar68) >= 2.4.8.1
-                python3.9dist(foobar69) >= 2.4.8
                 (python3.9dist(foobar7) >= 2.4.8~b5 with python3.9dist(foobar7) < 2.5)
                 python3.9dist(foobar70) >= 2
                 python3.9dist(foobar71) >= 2
-                python3.9dist(foobar72) >= 2
                 python3.9dist(foobar73) >= 2.4.8~b5
                 python3.9dist(foobar74) >= 2~b5
                 python3.9dist(foobar75) >= 2.4.8^post1
@@ -1306,10 +1300,8 @@
                 python3.9dist(foobar78) > 2.4.8.0
                 python3.9dist(foobar79) > 2.4.8.1.0
                 (python3.9dist(foobar8) >= 2~b5 with python3.9dist(foobar8) < 2.1)
-                python3.9dist(foobar80) >= 2.4.8
                 python3.9dist(foobar81) > 2.0
                 python3.9dist(foobar82) > 2.0
-                python3.9dist(foobar83) >= 2
                 python3.9dist(foobar84) > 2.4.8~b5
                 python3.9dist(foobar85) > 2~b5
                 python3.9dist(foobar86) > 2.4.8^post1

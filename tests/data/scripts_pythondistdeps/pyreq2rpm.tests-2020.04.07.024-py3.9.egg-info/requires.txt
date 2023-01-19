@@ -45,10 +45,8 @@ foobar43!=2.0.post1
 foobar44<=2.4.8
 foobar45<=2.4.8.0
 foobar46<=2.4.8.1
-foobar47<=2.4.8.*
 foobar48<=2.0
 foobar49<=2
-foobar50<=2.*
 foobar51<=2.4.8b5
 foobar52<=2.0.0b5
 foobar53<=2.4.8.post1
@@ -56,10 +54,8 @@ foobar54<=2.0.post1
 foobar55<2.4.8
 foobar56<2.4.8.0
 foobar57<2.4.8.1
-foobar58<2.4.8.*
 foobar59<2.0
 foobar60<2
-foobar61<2.*
 foobar62<2.4.8b5
 foobar63<2.0.0b5
 foobar64<2.4.8.post1
@@ -67,10 +63,8 @@ foobar65<2.0.post1
 foobar66>=2.4.8
 foobar67>=2.4.8.0
 foobar68>=2.4.8.1
-foobar69>=2.4.8.*
 foobar70>=2.0
 foobar71>=2
-foobar72>=2.*
 foobar73>=2.4.8b5
 foobar74>=2.0.0b5
 foobar75>=2.4.8.post1
@@ -78,10 +72,8 @@ foobar76>=2.0.post1
 foobar77>2.4.8
 foobar78>2.4.8.0
 foobar79>2.4.8.1
-foobar80>2.4.8.*
 foobar81>2.0
 foobar82>2
-foobar83>2.*
 foobar84>2.4.8b5
 foobar85>2.0.0b5
 foobar86>2.4.8.post1

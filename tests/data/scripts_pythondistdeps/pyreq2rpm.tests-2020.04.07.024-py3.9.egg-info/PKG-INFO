@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pyreq2rpm.tests
-Version: 2020.04.07.024dab0
+Version: 2020.04.07.024
 Summary: Test package to verify conversion of dependencies from pip/python to rpm format, data taken from pyreq2rpm
 Author: Tomas Orsava (author of this metapackage)
 Home-page: https://github.com/gordonmessmer/pyreq2rpm
