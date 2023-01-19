@@ -36,7 +36,7 @@
     - pytest:
         dir: ./tests
         # Use update-test-sources.sh to update the test data
-        run: python3 -m pytest --capture=no -vvv
+        run: python3 -m pytest -vvv
     required_packages:
     - rpm-build
     - rpmdevtools

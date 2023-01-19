@@ -53,6 +53,11 @@ def run_pythondistdeps(provides_params, requires_params, dist_egg_info_path, exp
     requires = subprocess.run((sys.executable, PYTHONDISTDEPS_PATH, *shlex.split(requires_params)),
             input=files, capture_output=True, check=False, encoding="utf-8")
 
+    print(provides_params, provides.stdout, sep=':\n', file=sys.stdout)
+    print(requires_params, requires.stdout, sep=':\n', file=sys.stdout)
+    print(provides_params, provides.stderr, sep=':\n', file=sys.stderr)
+    print(requires_params, requires.stderr, sep=':\n', file=sys.stderr)
+
     if expect_failure:
         if provides.returncode == 0 or requires.returncode == 0:
             raise RuntimeError(f"pythondistdeps.py did not exit with a non-zero code as expected.\n"
