@@ -49,6 +49,7 @@ install -Dpm0755 -t %{buildroot}%{_rpmconfigdir} *.py
 %changelog
 * Tue Mar 07 2023 Miro Hrončok <mhroncok@redhat.com> - 14-3
 - Avoid needless pkg_resources import in pythonbundles.py
+- Ignore environment markers in pythonbundles.py
 
 * Fri Jan 20 2023 Fedora Release Engineering <releng@fedoraproject.org> - 14-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_38_Mass_Rebuild

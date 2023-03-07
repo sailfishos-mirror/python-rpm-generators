@@ -15,6 +15,8 @@
 import pathlib
 import sys
 
+from packaging import requirements
+
 import pythondistdeps
 
 def generate_bundled_provides(paths, namespace):
@@ -33,8 +35,14 @@ def generate_bundled_provides(paths, namespace):
                 continue
             line = line.strip()
             if line:
-                name, _, version = line.partition('==')
-                name = pythondistdeps.normalize_name(name)
+                requirement = requirements.Requirement(line)
+                for spec in requirement.specifier:
+                    if spec.operator == '==':
+                        version = spec.version
+                        break
+                else:
+                    raise ValueError('pythonbundles.py only handles exactly one == requirement')
+                name = pythondistdeps.normalize_name(requirement.name)
                 bundled_name = f"bundled({namespace}({name}))"
                 python_provide = pythondistdeps.convert(bundled_name, '==', version)
                 provides.add(f'Provides: {python_provide}')

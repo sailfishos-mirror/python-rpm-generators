@@ -1,3 +1,4 @@
 Provides: bundled(python3dist(ordered-set)) = 3.1.1
 Provides: bundled(python3dist(packaging)) = 16.8
 Provides: bundled(python3dist(pyparsing)) = 2.2.1
+Provides: bundled(python3dist(tomli)) = 1.2.3
