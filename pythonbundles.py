@@ -15,12 +15,7 @@
 import pathlib
 import sys
 
-# inject parse_version import to pythondistdeps
-# not the nicest API, but :/
-from pkg_resources import parse_version
 import pythondistdeps
-pythondistdeps.parse_version = parse_version
-
 
 def generate_bundled_provides(paths, namespace):
     provides = set()
