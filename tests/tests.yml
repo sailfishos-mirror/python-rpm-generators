@@ -18,6 +18,9 @@
   roles:
   - role: standard-test-basic
     tests:
+    - rpm_qa:
+        dir: .
+        run: rpm -qa | sort
     - pythonabi:
         dir: .
         run: ./pythonabi.sh
