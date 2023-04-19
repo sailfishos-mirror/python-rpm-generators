@@ -33,16 +33,13 @@
     - console_script:
         dir: .
         run: ./console_script.sh
-    - prepare-test-data:
-        dir: .
-        run: tar -xvf test-sources-*.tar.gz -C ./tests/data/scripts_pythondistdeps/
     - pytest:
-        dir: ./tests
-        # Use update-test-sources.sh to update the test data
-        run: python3 -m pytest -vvv
+        dir: .
+        run: ./download_data_and_run_pytest.sh
     required_packages:
     - rpm-build
     - rpmdevtools
+    - fedpkg-minimal
     - python3-devel
     - python3-pip
     - python3-pytest
