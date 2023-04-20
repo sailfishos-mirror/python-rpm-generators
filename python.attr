@@ -5,8 +5,10 @@
     --    python(abi) = MAJOR.MINOR
     -- (Don't match against -config tools e.g. /usr/bin/python2.6-config)
     local path = rpm.expand('%1')
-    if path:match('/usr/bin/python%d+%.%d+$') then
-        local provides = path:gsub('.*/usr/bin/python(%d+%.%d+)', 'python(abi) = %1')
+    -- Use /usr prefix by default, and /app for flatpak builds
+    local prefix = rpm.expand('%{?!flatpak:/usr}%{?flatpak:/app}')
+    if path:match(prefix .. '/bin/python%d+%.%d+$') then
+        local provides = path:gsub('.*' .. prefix .. '/bin/python(%d+%.%d+)', 'python(abi) = %1')
         print(provides)
     end
 }
@@ -18,10 +20,12 @@
     -- generating a line of the form:
     --    python(abi) = MAJOR.MINOR
     local path = rpm.expand('%1')
-    if path:match('/usr/lib%d*/python%d+%.%d+/.*') then
-        local requires = path:gsub('.*/usr/lib%d*/python(%d+%.%d+)/.*', 'python(abi) = %1')
+    -- Use /usr prefix by default, and /app for flatpak builds
+    local prefix = rpm.expand('%{?!flatpak:/usr}%{?flatpak:/app}')
+    if path:match(prefix .. '/lib%d*/python%d+%.%d+/.*') then
+        local requires = path:gsub('.*' .. prefix .. '/lib%d*/python(%d+%.%d+)/.*', 'python(abi) = %1')
         print(requires)
     end
 }
 
-%__python_path ^((%{_prefix}/lib(64)?/python[[:digit:]]+\\.[[:digit:]]+/.*\\.(py[oc]?|so))|(%{_bindir}/python[[:digit:]]+\\.[[:digit:]]+))$
+%__python_path ^((%{?!flatpak:/usr}%{?flatpak:/app}/lib(64)?/python[[:digit:]]+\\.[[:digit:]]+/.*\\.(py[oc]?|so))|(%{_bindir}/python[[:digit:]]+\\.[[:digit:]]+))$
