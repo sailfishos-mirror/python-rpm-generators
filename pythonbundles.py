@@ -4,7 +4,7 @@
 # This program is free software.
 #
 # It is placed in the public domain or under the CC0-1.0-Universal license,
-# whichever is more permissive.
+# whichever you choose.
 #
 # Alternatively, it may be redistributed and/or modified under the terms of
 # the LGPL version 2.1 (or later) or GPL version 2 (or later).
