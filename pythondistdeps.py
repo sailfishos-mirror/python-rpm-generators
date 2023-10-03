@@ -94,8 +94,8 @@ class Distribution(PathDistribution):
     # that it works also on previous Python/importlib_metadata versions.
     @property
     def name(self):
-        """Return the 'Name' metadata for the distribution package."""
-        return self.metadata['Name']
+        """Return the 'Name' metadata for the distribution package or None."""
+        return self.metadata.get('Name')
 
     def _parse_py_version(self, path):
         # Try to parse the Python version from the path the metadata
