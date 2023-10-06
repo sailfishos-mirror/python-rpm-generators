@@ -1,9 +1,6 @@
 %__pythonname_provides() %{lua:
     local python = require 'fedora.srpm.python'
-    -- this macro is called for each file in a package, the path being in %1
-    -- but we don't need to know the path, so we would get for each file: Macro %1 defined but not used within scope
-    -- in here, we expand %name conditionally on %1 to suppress the warning
-    local name = rpm.expand('%{?1:%{name}}')
+    local name = rpm.expand('%{name}')
     local evr = rpm.expand('%{?epoch:%{epoch}:}%{version}-%{release}')
     local provides = python.python_altprovides_once(name, evr)
     -- provides is either an array/table or nil
@@ -23,10 +20,7 @@
     -- In Fedora this is not needed as we don't ship ecosystem packages
     -- for alternative Python interpreters.
     local python = require 'fedora.srpm.python'
-    -- this macro is called for each file in a package, the path being in %1
-    -- but we don't need to know the path, so we would get for each file: Macro %1 defined but not used within scope
-    -- in here, we expand %name conditionally on %1 to suppress the warning
-    local name = rpm.expand('%{?1:%{name}}')
+    local name = rpm.expand('%{name}')
     local evr = rpm.expand('%{?epoch:%{epoch}:}%{version}-%{release}')
     local obsoletes = python.python_altobsoletes_once(name, evr)
     -- obsoletes is either an array/table or nil
