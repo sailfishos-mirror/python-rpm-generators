@@ -43,7 +43,7 @@ test $(rpm -qp --obsoletes ${RPMDIR}/python${X_Y}-foo-0-0.noarch.rpm | wc -l) -e
 echo "Obsoletes for python3-foo"
 rpm -qp --obsoletes ${RPMDIR}/python3-foo-0-0.noarch.rpm
 # In ELN/RHEL the pythonX.Y-* Obsoletes is generated, but not in Fedora, so we check for it explicitly.
-rpm -qp --obsoletes ${RPMDIR}/python3-foo-0-0.noarch.rpm | grep -q '^python'${X_Y}'-py_provides < 0-0$' && exit 1 || true
+rpm -qp --obsoletes ${RPMDIR}/python3-foo-0-0.noarch.rpm | grep -q '^python'${X_Y}'-foo < 0-0$' && exit 1 || true
 test $(rpm -qp --obsoletes ${RPMDIR}/python3-foo-0-0.noarch.rpm | wc -l) -eq 0
 
 echo "Obsoletes for python2-foo"
