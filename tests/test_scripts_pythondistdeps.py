@@ -22,7 +22,7 @@
 # Requirements for this script:
 # - Python >= 3.6
 # - pip >= 20.0.1
-# - setuptools
+# - packaging
 # - pytest
 # - pyyaml
 
@@ -136,10 +136,10 @@ def check_and_install_test_data():
                             backup_argv = sys.argv[:]
 
                             if type == "wheel":
-                                from pkg_resources import parse_version
+                                from packaging.version import Version
                                 abi = f"cp{py_version_nodots}"
                                 # The "m" was removed from the abi flag in Python version 3.8
-                                if parse_version(py_version) < parse_version('3.8'):
+                                if Version(py_version) < Version('3.8'):
                                     abi += "m"
 
                                 # Install = download and unpack wheel into our
