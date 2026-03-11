@@ -25,7 +25,6 @@
 # - setuptools
 # - pytest
 # - pyyaml
-# - wheel
 
 
 from pathlib import Path
