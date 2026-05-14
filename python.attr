@@ -28,4 +28,4 @@
     end
 }
 
-%__python_path ^((%{?!flatpak:/usr}%{?flatpak:/app}/lib(64)?/python[[:digit:]]+\\.[[:digit:]]+/.*\\.(py[oc]?|so))|(%{_bindir}/python[[:digit:]]+\\.[[:digit:]]+))$
+%__python_path ^((%{?!flatpak:/usr}%{?flatpak:/app}/lib(64)?/python[[:digit:]]+\\.[[:digit:]]+/.+)|(%{_bindir}/python[[:digit:]]+\\.[[:digit:]]+))$

@@ -17,6 +17,7 @@ mkdir -p %{buildroot}/opt%{_bindir}
 
 echo "print()" > %{buildroot}%{python3_sitelib}/file.py
 echo "print()" > %{buildroot}/opt%{python3_sitelib}/file.py
+echo "data" > %{buildroot}%{python3_sitelib}/file.txt
 
 cp %{python3_sitearch}/../lib-dynload/cmath.*.so %{buildroot}%{python3_sitearch}/file.so
 
@@ -47,6 +48,15 @@ Summary:        ...
 ...
 %files -n python-interpreter
 %{_bindir}/python%{python3_version}
+
+
+%package -n python-data
+Summary:        ...
+BuildArch: noarch
+%description -n python-data
+...
+%files -n python-data
+%{python3_sitelib}/file.txt
 
 
 %package -n python-misplaced-library
