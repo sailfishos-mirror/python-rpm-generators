@@ -76,7 +76,12 @@ class Distribution(PathDistribution):
 
         # Check that the initialization went well and metadata are not missing or corrupted
         # name is the most important attribute, if it doesn't exist, import failed
-        if not self.name or not isinstance(self.name, str):
+        # Python 3.15+ raises MetadataNotFound (FileNotFoundError) instead of returning None
+        try:
+            name = self.name
+        except FileNotFoundError:
+            name = None
+        if not name or not isinstance(name, str):
             print("*** PYTHON_METADATA_FAILED_TO_PARSE_ERROR___SEE_STDERR ***")
             print('Error: Python metadata at `{}` are missing or corrupted.'.format(path), file=stderr)
             exit(65)  # os.EX_DATAERR
